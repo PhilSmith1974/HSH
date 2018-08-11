@@ -215,6 +215,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Entities\ItemType.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Favourite.cs" />
+    <Compile Include="Entities\FavouriteProperty.cs" />
+    <Compile Include="Entities\PropertyItem.cs" />
+    <Compile Include="Entities\PropertyLinkText.cs" />
+    <Compile Include="Entities\PropertyType.cs" />
+    <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Part.cs" />
+    <Compile Include="Entities\Section.cs" />
+    <Compile Include="Entities\UserFavourite.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -296,7 +307,6 @@
     <Folder Include="Content\Documents\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Logos\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

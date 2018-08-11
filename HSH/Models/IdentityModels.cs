@@ -1,14 +1,20 @@
 ﻿using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HSH.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HSH.Models
 {
+    
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
+
     {
+        public string FirstName { get; set; }
+        public bool IsActive { get; set; }
+        public Database Registered { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -29,5 +35,17 @@ namespace HSH.Models
         {
             return new ApplicationDbContext();
         }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Part> Parts { get; set; }
+        public DbSet<ItemType> ItemTypes { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Property> Propertys { get; set; }
+        public DbSet<PropertyType> PropertyTypes { get; set; }
+        public DbSet<PropertyLinkText> PropertyLinkTexts { get; set; }
+        public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<PropertyItem> PropertyItems { get; set; }
+        public DbSet<FavouriteProperty> FavouritePropertys { get; set; }
+        public DbSet<UserFavourite> UserFavourites { get; set; }
+
     }
 }
