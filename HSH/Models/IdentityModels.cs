@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using HSH.Entities;
@@ -21,6 +22,12 @@ namespace HSH.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
+        }
+
+        public static implicit operator ApplicationUser(ApplicationUser v)
+        {
+            //return new ApplicationUser();
+            throw new NotImplementedException();
         }
     }
 

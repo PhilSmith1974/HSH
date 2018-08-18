@@ -38,7 +38,8 @@ namespace HSH.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(property);
+            var model = await property.Convert(db);
+            return View(model);
         }
 
         // GET: Admin/Property/Create
@@ -116,7 +117,9 @@ namespace HSH.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            return View(property);
+            var model = await property.Convert(db);
+            return View(model);
+            
         }
 
         // POST: Admin/Property/Delete/5

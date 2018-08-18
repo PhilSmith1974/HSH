@@ -26,7 +26,7 @@ namespace HSH.Areas.Admin.Models
         public int PropertyTypeId { get; set; }
 
         [DisplayName("Property Link Text")]
-        public ICollection <PropertyLinkText> PropertyLinkTexts { get; set; }
+        public ICollection<PropertyLinkText> PropertyLinkTexts { get; set; }
 
         [DisplayName("Property Type")]
         public ICollection<PropertyType> PropertyTypes { get; set; }
@@ -35,8 +35,10 @@ namespace HSH.Areas.Admin.Models
         {
             get
             {
-                return PropertyTypes == null || PropertyTypes.Count.Equals(0) ?
-                    String.Empty : PropertyTypes.First(pt => pt.Id.Equals(PropertyTypeId)).Title;
+                return PropertyTypes == null ||
+                    PropertyTypes.Count.Equals(0) ?
+                    String.Empty : PropertyTypes.First(
+                        pt => pt.Id.Equals(PropertyTypeId)).Title;
             }
         }
 
@@ -44,8 +46,10 @@ namespace HSH.Areas.Admin.Models
         {
             get
             {
-                return PropertyLinkTexts == null || PropertyLinkTexts.Count.Equals(0) ?
-                    String.Empty : PropertyLinkTexts.First(pt => pt.Id.Equals(PropertyLinkTextId)).Title;
+                return PropertyLinkTexts == null ||
+                    PropertyLinkTexts.Count.Equals(0) ?
+                    String.Empty : PropertyLinkTexts.First(
+                        pt => pt.Id.Equals(PropertyLinkTextId)).Title;
             }
         }
 

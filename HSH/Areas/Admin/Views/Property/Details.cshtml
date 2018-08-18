@@ -1,4 +1,4 @@
-﻿@model HSH.Entities.Item
+﻿@model HSH.Areas.Admin.Models.PropertyModel
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Item</h4>
+    <h4>Property</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -25,15 +25,7 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Url)
-        </dd>
-
+               
         <dt>
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
@@ -43,61 +35,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HTML)
+            @Html.DisplayNameFor(model => model.PropertyTypes)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HTML)
+            @Html.DisplayFor(model => model.PropertyType)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WaitDays)
+            @Html.DisplayNameFor(model => model.PropertyLinkTexts)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WaitDays)
+            @Html.DisplayFor(model => model.PropertyLinkText)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PropertyId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PropertyId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ItemTypeId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ItemTypeId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SectionId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SectionId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PartId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PartId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsAvailable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsAvailable)
-        </dd>
-
     </dl>
 </div>
 <p>
