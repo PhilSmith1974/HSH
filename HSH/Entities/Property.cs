@@ -23,7 +23,7 @@ namespace HSH.Entities
         [MaxLength(1024)]
 
         public string ImageUrl { get; set; }
-        public int PropertyLinkTestId { get; set; }
+        public int PropertyLinkTextId { get; set; }
         public int PropertyTypeID { get; set; }
       
     }

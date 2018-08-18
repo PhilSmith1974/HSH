@@ -215,9 +215,12 @@
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\PartController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PropertyController.cs" />
     <Compile Include="Areas\Admin\Controllers\PropertyLinkTextController.cs" />
     <Compile Include="Areas\Admin\Controllers\PropertyTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
+    <Compile Include="Areas\Admin\Extensions\ConversionExtensions.cs" />
+    <Compile Include="Areas\Admin\Models\PropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\SmallButtonModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -298,6 +301,11 @@
     <Content Include="Areas\Admin\Views\Item\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Item\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Item\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Property\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
