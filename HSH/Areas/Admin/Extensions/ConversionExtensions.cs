@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using HSH.Areas.Admin.Models;
-//using System.Collections;
+using System.Collections;
 using HSH.Models;
 using HSH.Entities;
 using System.Data.Entity;
@@ -40,8 +40,10 @@ namespace HSH.Areas.Admin.Extensions
         public static async Task<PropertyModel> Convert(
            this Property property, ApplicationDbContext db)
         {
-            var text = await db.PropertyLinkTexts.FirstOrDefaultAsync(p => p.Id.Equals(property.PropertyLinkTextId));
-            var type = await db.PropertyTypes.FirstOrDefaultAsync(p => p.Id.Equals(property.PropertyTypeID));
+            var text = await db.PropertyLinkTexts.FirstOrDefaultAsync(
+                p => p.Id.Equals(property.PropertyLinkTextId));
+            var type = await db.PropertyTypes.FirstOrDefaultAsync(
+                p => p.Id.Equals(property.PropertyTypeID));
 
             var model = new PropertyModel
                    {

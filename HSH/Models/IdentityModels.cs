@@ -24,11 +24,11 @@ namespace HSH.Models
             return userIdentity;
         }
 
-        public static implicit operator ApplicationUser(ApplicationUser v)
-        {
-            //return new ApplicationUser();
-            throw new NotImplementedException();
-        }
+        //public static implicit operator ApplicationUser(ApplicationUser v)
+        //{
+        //    //return new ApplicationUser();
+        //    throw new NotImplementedException();
+        //}
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
