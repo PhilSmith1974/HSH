@@ -12,6 +12,7 @@ using HSH.Models;
 
 namespace HSH.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PropertyTypeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
