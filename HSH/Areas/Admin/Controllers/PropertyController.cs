@@ -51,7 +51,7 @@ namespace HSH.Areas.Admin.Controllers
                 PropertyTypes = await db.PropertyTypes.ToListAsync()
 
             };
-            return View();
+            return View(model);
         }
 
         // POST: Admin/Property/Create

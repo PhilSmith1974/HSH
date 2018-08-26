@@ -45,8 +45,9 @@ namespace HSH.Areas.Admin.Extensions
             var type = await db.PropertyTypes.FirstOrDefaultAsync(
                 p => p.Id.Equals(property.PropertyTypeID));
 
+            
             var model = new PropertyModel
-                   {
+            {
                        Id = property.Id,
                        Title = property.Title,
                        Description = property.Description,
