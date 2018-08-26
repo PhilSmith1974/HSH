@@ -15,7 +15,7 @@ namespace HSH.Models
     {
         public string FirstName { get; set; }
         public bool IsActive { get; set; }
-        public Database Registered { get; set; }
+        public DateTime Registered { get; set; } // errored to Public Database
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -25,12 +25,12 @@ namespace HSH.Models
             return userIdentity;
         }
 
-        //public static implicit operator ApplicationUser(ApplicationUser v)
-        //{
-        //    //return new ApplicationUser();
-        //    throw new NotImplementedException();
-        //}
-    }
+    //    public static implicit operator ApplicationUser(ApplicationUser v)
+    //    {
+    //        //return new ApplicationUser();
+    //        throw new NotImplementedException();
+    //    }
+        }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

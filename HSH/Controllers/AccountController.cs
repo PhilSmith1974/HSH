@@ -161,7 +161,7 @@ namespace HSH.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     IsActive = true,
-                    //Registered = DateTime.Now,
+                    Registered = DateTime.Now,
                     EmailConfirmed = true
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
