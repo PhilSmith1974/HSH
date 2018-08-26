@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,6 +13,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using HSH.Models;
+using Twilio;
+using Twilio.Clients;
+using System.Configuration;
 
 namespace HSH
 {
@@ -27,7 +32,29 @@ namespace HSH
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your SMS service here to send a text message.
+            //var twilio = new TwilioRestClient(TwilioSettings.AccountSID, TwilioSettings.AuthToken);
+
+            //var result = twilio.SendMessage(TwilioSettings.PhoneNumber, message.Destination, message.Body);
+
+            //Trace.TraceInformation(result.Status);
+
+            //// Twilio doesn't currently have an async API, so we return success.
+            //return Task.FromResult(0);
+
+            //Implementation is Key!!
+            var Twilio = new TwilioRestClient(
+                ConfigurationManager.AppSettings["TwilioSid"],
+                ConfigurationManager.AppSettings["TwilioToken"]
+                );
+            var result = Twilio.SendMessage(
+                ConfigurationManager.AppSettings["TwilioFromPhone"],
+                message.Destination, message.Body);
+
+            // Status is one of Queued, Sending, Sent, Failed or Null if the number is not valid
+            //Trace.TraceInformation(result.Status);
+
+            //Twilio doesn't currently have an async API, so return success.
+
             return Task.FromResult(0);
         }
     }
@@ -71,11 +98,16 @@ namespace HSH
             {
                 MessageFormat = "Your security code is {0}"
             });
+
             manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
             {
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
+
+            //manager.RegisterTwoFactorProvider("Authy One Touch", new AuthyOneTouchProvider<ApplicationUser>("AuthyId"));
+            //manager.RegisterTwoFactorProvider("Authy Token", new AuthyTokenProvider<ApplicationUser>("AuthyId"));
+
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;

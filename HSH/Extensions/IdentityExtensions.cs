@@ -27,6 +27,7 @@ namespace HSH.Extensions
                                       Id = u.Id,
                                       Email = u.Email,
                                       FirstName = u.FirstName
+                                      
                                   }).OrderBy(o => o.Email).ToListAsync());
         }
     }
