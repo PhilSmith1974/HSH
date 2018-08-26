@@ -493,5 +493,13 @@ namespace HSH.Controllers
             }
         }
         #endregion
+
+        public async Task<ActionResult> Index()
+        {
+            var users = new List<UserViewModel>();
+            await users.GetUsers();
+
+            return View(users);
+        }
     }
 }

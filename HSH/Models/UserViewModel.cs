@@ -9,11 +9,11 @@ namespace HSH.Models
     public class UserViewModel
     {
         [Display(Name = "User Id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public int Email { get; set; }
+        public string Email { get; set; }
         [Display(Name = "First Name")]
         [StringLength(30, ErrorMessage = "The {0} must be at least {1} characters long", MinimumLength = 2)]
         public string FirstName { get; set; }
