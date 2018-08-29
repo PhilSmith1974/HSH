@@ -20,8 +20,11 @@ namespace HSH.Entities
         [MaxLength(2048)]
 
         public string Description { get; set; }
-        [MaxLength(1024)]
 
+        [Required]
+        public double Price { get; set; }
+
+        [MaxLength(1024)]
         public string ImageUrl { get; set; }
         public int PropertyLinkTextId { get; set; }
         public int PropertyTypeID { get; set; }

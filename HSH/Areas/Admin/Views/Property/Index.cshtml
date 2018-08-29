@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<HSH.Areas.Admin.Models.PropertyModel>
-
 @using HSH.Areas.Admin.Models;
 
 @{
@@ -20,11 +19,14 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PropertyLinkTexts)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PropertyTypes)
-        </th>        
+        </th>
         <th></th>
     </tr>
 
@@ -37,6 +39,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.PropertyLinkText)
             (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
         </td>
@@ -44,7 +49,7 @@
             @Html.DisplayFor(modelItem => item.PropertyType)
             (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
         </td>
-       
+
         @Html.Partial("_TableButtonsPartial",
          new SmallButtonModel { Id = item.Id })
         @*<td>

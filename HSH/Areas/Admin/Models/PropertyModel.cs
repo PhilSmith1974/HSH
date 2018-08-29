@@ -16,8 +16,11 @@ namespace HSH.Areas.Admin.Models
         [MaxLength(2048)]
 
         public string Description { get; set; }
-        [MaxLength(1024)]
 
+        [Required]
+        public double Price { get; set; }
+
+        [MaxLength(1024)]
         [DisplayName("Image Url")]
         public string ImageUrl { get; set; }
 
