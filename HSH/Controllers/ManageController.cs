@@ -117,7 +117,9 @@ namespace HSH.Controllers
                 return View(model);
             }
             // Generate the token and send it
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(
+                User.Identity.GetUserId(),
+                model.Number);
             if (UserManager.SmsService != null)
             {
                 var message = new IdentityMessage

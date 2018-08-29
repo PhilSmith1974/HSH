@@ -13,9 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using HSH.Models;
-using Twilio;
+//using Twilio;
 using Twilio.Clients;
 using System.Configuration;
+using HSH.Domain.Twilio;
+using HSH.Domain;
 
 namespace HSH
 {
@@ -30,34 +32,25 @@ namespace HSH
 
     public class SmsService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        private readonly ITwilioMessageSender _messageSender;
+
+        public SmsService() : this(new TwilioMessageSender()) { }
+
+        public SmsService(ITwilioMessageSender messageSender)
         {
-            //var twilio = new TwilioRestClient(TwilioSettings.AccountSID, TwilioSettings.AuthToken);
-
-            //var result = twilio.SendMessage(TwilioSettings.PhoneNumber, message.Destination, message.Body);
-
-            //Trace.TraceInformation(result.Status);
-
-            //// Twilio doesn't currently have an async API, so we return success.
-            //return Task.FromResult(0);
-
-            //Implementation is Key!!
-            var Twilio = new TwilioRestClient(
-                ConfigurationManager.AppSettings["TwilioSid"],
-                ConfigurationManager.AppSettings["TwilioToken"]
-                );
-            var result = Twilio.SendMessage(
-                ConfigurationManager.AppSettings["TwilioFromPhone"],
-                message.Destination, message.Body);
-
-            // Status is one of Queued, Sending, Sent, Failed or Null if the number is not valid
-            //Trace.TraceInformation(result.Status);
-
-            //Twilio doesn't currently have an async API, so return success.
-
-            return Task.FromResult(0);
+            _messageSender = messageSender;
         }
+
+        public async Task SendAsync(IdentityMessage message)
+        {
+            await _messageSender.SendMessageAsync(message.Destination,
+                                                  Config.TwilioNumber,
+                                                  message.Body);
+        }
+
+
     }
+}
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -107,9 +100,10 @@ namespace HSH
 
             //manager.RegisterTwoFactorProvider("Authy One Touch", new AuthyOneTouchProvider<ApplicationUser>("AuthyId"));
             //manager.RegisterTwoFactorProvider("Authy Token", new AuthyTokenProvider<ApplicationUser>("AuthyId"));
+            
 
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            manager.EmailService = new HSH.EmailService();
+            manager.SmsService = new HSH.SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
@@ -118,6 +112,7 @@ namespace HSH
             }
             return manager;
         }
+        
     }
 
     // Configure the application sign-in manager which is used in this application.
@@ -138,4 +133,5 @@ namespace HSH
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
-}
+
+
