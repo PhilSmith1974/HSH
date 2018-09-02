@@ -13,11 +13,12 @@ namespace HSH.Areas.Admin.Models
         [MaxLength(255)]
         [Required]
         public string Title { get; set; }
-        [MaxLength(2048)]
 
+        [MaxLength(2048)]
         public string Description { get; set; }
 
         [Required]
+        [DisplayName("Price € ")]
         public double Price { get; set; }
 
         [MaxLength(1024)]

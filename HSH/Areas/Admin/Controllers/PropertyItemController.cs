@@ -9,129 +9,110 @@ using System.Web;
 using System.Web.Mvc;
 using HSH.Entities;
 using HSH.Models;
-using HSH.Areas.Admin.Extensions;
-using HSH.Areas.Admin.Models;
-//using System.Transactions;
 
 namespace HSH.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class PropertyController : Controller
+    public class PropertyItemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Property
+        // GET: Admin/PropertyItem
         public async Task<ActionResult> Index()
         {
-            var propertys = await db.Propertys.ToListAsync();
-            var model = await propertys.Convert(db);
-            return View(model);
+            return View(await db.PropertyItems.ToListAsync());
         }
 
-        // GET: Admin/Property/Details/5
+        // GET: Admin/PropertyItem/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = await db.Propertys.FindAsync(id);
-            if (property == null)
+            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            if (propertyItem == null)
             {
                 return HttpNotFound();
             }
-            var model = await property.Convert(db);
-            return View(model);
+            return View(propertyItem);
         }
 
-        // GET: Admin/Property/Create
-        public async Task <ActionResult> Create()
+        // GET: Admin/PropertyItem/Create
+        public ActionResult Create()
         {
-            var model = new PropertyModel
-            {
-                PropertyLinkTexts = await db.PropertyLinkTexts.ToListAsync(),
-                PropertyTypes = await db.PropertyTypes.ToListAsync()
-
-            };
-            return View(model);
+            return View();
         }
 
-        // POST: Admin/Property/Create
+        // POST: Admin/PropertyItem/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,Price,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
+        public async Task<ActionResult> Create([Bind(Include = "PropertyId,ItemId,FavouriteId")] PropertyItem propertyItem)
         {
-            // Possible error
             if (ModelState.IsValid)
             {
-                db.Propertys.Add(property);
+                db.PropertyItems.Add(propertyItem);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(property);
+            return View(propertyItem);
         }
 
-        // GET: Admin/Property/Edit/5
+        // GET: Admin/PropertyItem/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = await db.Propertys.FindAsync(id);
-            if (property == null)
+            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            if (propertyItem == null)
             {
                 return HttpNotFound();
             }
-            var prop = new List<Property>();
-            prop.Add(property);
-            var PropertyModel = await prop.Convert(db);
-            return View(PropertyModel.First());
+            return View(propertyItem);
         }
 
-        // POST: Admin/Property/Edit/5
+        // POST: Admin/PropertyItem/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
+        public async Task<ActionResult> Edit([Bind(Include = "PropertyId,ItemId,FavouriteId")] PropertyItem propertyItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(property).State = EntityState.Modified;
+                db.Entry(propertyItem).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(property);
+            return View(propertyItem);
         }
 
-        // GET: Admin/Property/Delete/5
+        // GET: Admin/PropertyItem/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = await db.Propertys.FindAsync(id);
-            if (property == null)
+            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            if (propertyItem == null)
             {
                 return HttpNotFound();
             }
-            var model = await property.Convert(db);
-            return View(model);
-            
+            return View(propertyItem);
         }
 
-        // POST: Admin/Property/Delete/5
+        // POST: Admin/PropertyItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Property property = await db.Propertys.FindAsync(id);
-            db.Propertys.Remove(property);
+            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            db.PropertyItems.Remove(propertyItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

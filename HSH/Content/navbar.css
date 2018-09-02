@@ -1,4 +1,8 @@
-﻿.navbar{
+﻿.body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.navbar{
     border-bottom: 1px solid #c8c8c8;
     background-color: #FFF;
 }

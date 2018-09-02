@@ -9,129 +9,110 @@ using System.Web;
 using System.Web.Mvc;
 using HSH.Entities;
 using HSH.Models;
-using HSH.Areas.Admin.Extensions;
-using HSH.Areas.Admin.Models;
-//using System.Transactions;
 
 namespace HSH.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class PropertyController : Controller
+    public class FavouriteController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Property
+        // GET: Admin/Favourite
         public async Task<ActionResult> Index()
         {
-            var propertys = await db.Propertys.ToListAsync();
-            var model = await propertys.Convert(db);
-            return View(model);
+            return View(await db.Favourites.ToListAsync());
         }
 
-        // GET: Admin/Property/Details/5
+        // GET: Admin/Favourite/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = await db.Propertys.FindAsync(id);
-            if (property == null)
+            Favourite favourite = await db.Favourites.FindAsync(id);
+            if (favourite == null)
             {
                 return HttpNotFound();
             }
-            var model = await property.Convert(db);
-            return View(model);
+            return View(favourite);
         }
 
-        // GET: Admin/Property/Create
-        public async Task <ActionResult> Create()
+        // GET: Admin/Favourite/Create
+        public ActionResult Create()
         {
-            var model = new PropertyModel
-            {
-                PropertyLinkTexts = await db.PropertyLinkTexts.ToListAsync(),
-                PropertyTypes = await db.PropertyTypes.ToListAsync()
-
-            };
-            return View(model);
+            return View();
         }
 
-        // POST: Admin/Property/Create
+        // POST: Admin/Favourite/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,Price,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,RegisterationCode")] Favourite favourite)
         {
-            // Possible error
             if (ModelState.IsValid)
             {
-                db.Propertys.Add(property);
+                db.Favourites.Add(favourite);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(property);
+            return View(favourite);
         }
 
-        // GET: Admin/Property/Edit/5
+        // GET: Admin/Favourite/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = await db.Propertys.FindAsync(id);
-            if (property == null)
+            Favourite favourite = await db.Favourites.FindAsync(id);
+            if (favourite == null)
             {
                 return HttpNotFound();
             }
-            var prop = new List<Property>();
-            prop.Add(property);
-            var PropertyModel = await prop.Convert(db);
-            return View(PropertyModel.First());
+            return View(favourite);
         }
 
-        // POST: Admin/Property/Edit/5
+        // POST: Admin/Favourite/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,RegisterationCode")] Favourite favourite)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(property).State = EntityState.Modified;
+                db.Entry(favourite).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(property);
+            return View(favourite);
         }
 
-        // GET: Admin/Property/Delete/5
+        // GET: Admin/Favourite/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Property property = await db.Propertys.FindAsync(id);
-            if (property == null)
+            Favourite favourite = await db.Favourites.FindAsync(id);
+            if (favourite == null)
             {
                 return HttpNotFound();
             }
-            var model = await property.Convert(db);
-            return View(model);
-            
+            return View(favourite);
         }
 
-        // POST: Admin/Property/Delete/5
+        // POST: Admin/Favourite/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Property property = await db.Propertys.FindAsync(id);
-            db.Propertys.Remove(property);
+            Favourite favourite = await db.Favourites.FindAsync(id);
+            db.Favourites.Remove(favourite);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

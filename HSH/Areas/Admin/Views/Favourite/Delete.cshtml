@@ -1,4 +1,4 @@
-﻿@model HSH.Areas.Admin.Models.PropertyModel
+﻿@model HSH.Entities.Favourite
 
 @{
     ViewBag.Title = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Property</h4>
+    <h4>Favourite</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,28 +28,13 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ImageUrl)
+            @Html.DisplayNameFor(model => model.RegisterationCode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImageUrl)
+            @Html.DisplayFor(model => model.RegisterationCode)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PropertyTypes)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PropertyType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PropertyLinkTexts)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PropertyLinkText)
-        </dd>
     </dl>
 
     @using (Html.BeginForm())
@@ -62,5 +47,3 @@
         </div>
     }
 </div>
-
-
