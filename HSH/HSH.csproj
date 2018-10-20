@@ -486,6 +486,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Estate Agent\" />
+    <Folder Include="Areas\User Account\" />
     <Folder Include="Content\Documents\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Logos\" />

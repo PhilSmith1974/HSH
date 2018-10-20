@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+
 using System.Web;
 using HSH.Areas.Admin.Models;
 using System.Collections;
@@ -12,6 +13,7 @@ using System.Linq;
 
 namespace HSH.Areas.Admin.Extensions
 {
+    #region Property
     public static class ConversionExtensions
     {
         public static async Task<IEnumerable<PropertyModel>> Convert (
@@ -47,19 +49,19 @@ namespace HSH.Areas.Admin.Extensions
             var type = await db.PropertyTypes.FirstOrDefaultAsync(
                 p => p.Id.Equals(property.PropertyTypeID));
 
-            
+
             var model = new PropertyModel
             {
-                       Id = property.Id,
-                       Title = property.Title,
-                       Description = property.Description,
-                       Price = property.Price,
-                       ImageUrl = property.ImageUrl,
-                       PropertyLinkTextId = property.PropertyLinkTextId,
-                       PropertyTypeId = property.PropertyTypeID,
-                       PropertyLinkTexts = new List <PropertyLinkText>(),
-                       PropertyTypes = new List <PropertyType>()
-                   };
+                Id = property.Id,
+                Title = property.Title,
+                Description = property.Description,
+                Price = property.Price,
+                ImageUrl = property.ImageUrl,
+                PropertyLinkTextId = property.PropertyLinkTextId,
+                PropertyTypeId = property.PropertyTypeID,
+                PropertyLinkTexts = new List<PropertyLinkText>(),
+                PropertyTypes = new List<PropertyType>()
+            };
 
             model.PropertyLinkTexts.Add(text);
             model.PropertyTypes.Add(type);
@@ -67,94 +69,94 @@ namespace HSH.Areas.Admin.Extensions
             return model;
 
         }
-//#endregion
+        #endregion
 
-//        #region Product Item
-//        public static async Task<IEnumerable<PropertyItemModel>> Convert(
-//        this IQueryable<PropertyItem> productItems, ApplicationDbContext db)
-//        {
-//            if (productItems.Count().Equals(0))
-//                return new List<PropertyItemModel>();
+        //        #region Product Item
+        //        public static async Task<IEnumerable<PropertyItemModel>> Convert(
+        //        this IQueryable<PropertyItem> productItems, ApplicationDbContext db)
+        //        {
+        //            if (productItems.Count().Equals(0))
+        //                return new List<PropertyItemModel>();
 
-//            return await (from pi in productItems
-//                          select new PropertyItemModel
-//                          {
-//                              ItemId = pi.ItemId,
-//                              ProductId = pi.PropertyId,
-//                              ItemTitle = db.Items.FirstOrDefault(
-//                                  i => i.Id.Equals(pi.ItemId)).Title,
-//                              ProductTitle = db.Propertys.FirstOrDefault(
-//                                  p => p.Id.Equals(pi.PropertyId)).Title
-//                          }).ToListAsync();
-//        }
+        //            return await (from pi in productItems
+        //                          select new PropertyItemModel
+        //                          {
+        //                              ItemId = pi.ItemId,
+        //                              ProductId = pi.PropertyId,
+        //                              ItemTitle = db.Items.FirstOrDefault(
+        //                                  i => i.Id.Equals(pi.ItemId)).Title,
+        //                              ProductTitle = db.Propertys.FirstOrDefault(
+        //                                  p => p.Id.Equals(pi.PropertyId)).Title
+        //                          }).ToListAsync();
+        //        }
 
-//        public static async Task<PropertyItemModel> Convert(
-//        this PropertyItem productItem, ApplicationDbContext db,
-//        bool addListData = true)
-//        {
-//            var model = new PropertyItemModel
-//            {
-//                ItemId = productItem.ItemId,
-//                ProductId = productItem.PropertyId,
-//                Items = addListData ? await db.Items.ToListAsync() : null,
-//                Products = addListData ? await db.Propertys.ToListAsync() : null,
-//                ItemTitle = (await db.Items.FirstOrDefaultAsync(i =>
-//                   i.Id.Equals(productItem.ItemId))).Title,
-//                ProductTitle = (await db.Propertys.FirstOrDefaultAsync(p =>
-//                   p.Id.Equals(productItem.PropertyId))).Title
-//            };
+        //        public static async Task<PropertyItemModel> Convert(
+        //        this PropertyItem productItem, ApplicationDbContext db,
+        //        bool addListData = true)
+        //        {
+        //            var model = new PropertyItemModel
+        //            {
+        //                ItemId = productItem.ItemId,
+        //                ProductId = productItem.PropertyId,
+        //                Items = addListData ? await db.Items.ToListAsync() : null,
+        //                Products = addListData ? await db.Propertys.ToListAsync() : null,
+        //                ItemTitle = (await db.Items.FirstOrDefaultAsync(i =>
+        //                   i.Id.Equals(productItem.ItemId))).Title,
+        //                ProductTitle = (await db.Propertys.FirstOrDefaultAsync(p =>
+        //                   p.Id.Equals(productItem.PropertyId))).Title
+        //            };
 
-//            return model;
-//        }
+        //            return model;
+        //        }
 
-//        public static async Task<bool> CanChange(
-//            this PropertyItem productItem, ApplicationDbContext db)
-//        {
-//            var oldPI = await db.PropertyItems.CountAsync(pi =>
-//                pi.PropertyId.Equals(productItem.OldPropertyId) &&
-//                pi.ItemId.Equals(productItem.OldItemId));
+        //        public static async Task<bool> CanChange(
+        //            this PropertyItem productItem, ApplicationDbContext db)
+        //        {
+        //            var oldPI = await db.PropertyItems.CountAsync(pi =>
+        //                pi.PropertyId.Equals(productItem.OldPropertyId) &&
+        //                pi.ItemId.Equals(productItem.OldItemId));
 
-//            var newPI = await db.PropertyItems.CountAsync(pi =>
-//                pi.PropertyId.Equals(productItem.PropertyId) &&
-//                pi.ItemId.Equals(productItem.ItemId));
+        //            var newPI = await db.PropertyItems.CountAsync(pi =>
+        //                pi.PropertyId.Equals(productItem.PropertyId) &&
+        //                pi.ItemId.Equals(productItem.ItemId));
 
-//            return oldPI.Equals(1) && newPI.Equals(0);
-//        }
+        //            return oldPI.Equals(1) && newPI.Equals(0);
+        //        }
 
-//        public static async Task Change(
-//            this PropertyItem productItem, ApplicationDbContext db)
-//        {
-//            var oldProductItem = await db.PropertyItems.FirstOrDefaultAsync(
-//                    pi => pi.PropertyId.Equals(productItem.OldPropertyId) &&
-//                    pi.ItemId.Equals(productItem.OldItemId));
+        //        public static async Task Change(
+        //            this PropertyItem productItem, ApplicationDbContext db)
+        //        {
+        //            var oldProductItem = await db.PropertyItems.FirstOrDefaultAsync(
+        //                    pi => pi.PropertyId.Equals(productItem.OldPropertyId) &&
+        //                    pi.ItemId.Equals(productItem.OldItemId));
 
-//            var newProductItem = await db.PropertyItems.FirstOrDefaultAsync(
-//                pi => pi.PropertyId.Equals(productItem.PropertyId) &&
-//                pi.ItemId.Equals(productItem.ItemId));
+        //            var newProductItem = await db.PropertyItems.FirstOrDefaultAsync(
+        //                pi => pi.PropertyId.Equals(productItem.PropertyId) &&
+        //                pi.ItemId.Equals(productItem.ItemId));
 
-//            if (oldProductItem != null && newProductItem == null)
-//            {
-//                newProductItem = new PropertyItem
-//                {
-//                    ItemId = productItem.ItemId,
-//                    PropertyId = productItem.PropertyId
-//                };
+        //            if (oldProductItem != null && newProductItem == null)
+        //            {
+        //                newProductItem = new PropertyItem
+        //                {
+        //                    ItemId = productItem.ItemId,
+        //                    PropertyId = productItem.PropertyId
+        //                };
 
-                //using (var transaction = new TransactionScope(
-                //    TransactionScopeAsyncFlowOption.Enabled))
-                //{
-                //    try
-                //    {
-                //        db.PropertyItems.Remove(oldProductItem);
-                //        db.PropertyItems.Add(newProductItem);
+        //using (var transaction = new TransactionScope(
+        //    TransactionScopeAsyncFlowOption.Enabled))
+        //{
+        //    try
+        //    {
+        //        db.PropertyItems.Remove(oldProductItem);
+        //        db.PropertyItems.Add(newProductItem);
 
-                //        await db.SaveChangesAsync();
-                //        transaction.Complete();
-                //    }
-                //    catch { transaction.Dispose(); }
-                //}
-            }
-        }
+        //        await db.SaveChangesAsync();
+        //        transaction.Complete();
+        //    }
+        //    catch { transaction.Dispose(); }
+        //}
+    }
+}
         //#endregion
 
         //#region Subscription Product

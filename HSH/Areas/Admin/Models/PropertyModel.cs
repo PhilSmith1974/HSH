@@ -25,19 +25,16 @@ namespace HSH.Areas.Admin.Models
         [DisplayName("Image Url")]
         public string ImageUrl { get; set; }
 
+        [DisplayName("Property Link Text")]
+        public int PropertyLinkTextId { get; set; }
 
         [DisplayName("Property Type")]
-        public int PropertyLinkTextId { get; set; }
         public int PropertyTypeId { get; set; }
-
         [DisplayName("Property Link Text")]
         public ICollection<PropertyLinkText> PropertyLinkTexts { get; set; }
-
-        
+        [DisplayName("Property Type")]
         public ICollection<PropertyType> PropertyTypes { get; set; }
-
-
-
+        
         public string PropertyType
         {
             get
