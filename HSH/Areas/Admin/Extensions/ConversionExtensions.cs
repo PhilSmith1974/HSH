@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using System.Web;
 using HSH.Areas.Admin.Models;
 using System.Collections;
@@ -66,9 +65,31 @@ namespace HSH.Areas.Admin.Extensions
             model.PropertyLinkTexts.Add(text);
             model.PropertyTypes.Add(type);
 
-            return model;
+            return model;        
 
         }
+        #endregion
+
+        #region Property Item
+        public static async Task<IEnumerable<PropertyItemModel>> Convert(
+           this IQueryable<PropertyItem> propertyItems, ApplicationDbContext db)
+        {
+            if (propertyItems.Count().Equals(0))
+                return new List<PropertyItemModel>();
+
+            return await(from pi in propertyItems
+                          select new PropertyItemModel
+                          {
+                              ItemId = pi.ItemId,
+                              PropertyId = pi.PropertyId,
+                              ItemTitle = db.Items.FirstOrDefault(
+                                  i => i.Id.Equals(pi.ItemId)).Title,
+                              PropertyTitle = db.Propertys.FirstOrDefault(
+                                 p => p.Id.Equals(pi.PropertyId)).Title
+
+                          }).ToListAsync();
+        }
+
         #endregion
 
         //        #region Product Item

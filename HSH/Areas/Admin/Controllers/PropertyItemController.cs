@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using HSH.Entities;
 using HSH.Models;
+using HSH.Areas.Admin.Models;
+using HSH.Areas.Admin.Extensions;
 
 namespace HSH.Areas.Admin.Controllers
 {
@@ -19,7 +21,7 @@ namespace HSH.Areas.Admin.Controllers
         // GET: Admin/PropertyItem
         public async Task<ActionResult> Index()
         {
-            return View(await db.PropertyItems.ToListAsync());
+            return View(await db.PropertyItems.Convert(db));
         }
 
         // GET: Admin/PropertyItem/Details/5
@@ -38,8 +40,14 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/PropertyItem/Create
-        public ActionResult Create()
+        public async Task <ActionResult> Create()
         {
+            var model = new PropertyItemModel
+            {
+                Items = await db.Items.ToListAsync(),
+                Propertys = await db.Propertys.ToListAsync()
+
+            };
             return View();
         }
 

@@ -23,13 +23,13 @@ namespace HSH.Areas.Admin.Models
                 if(Id !=null && Id > 0)
                     param.Append(String.Format("{0}={1}&","id", Id));
 
-                if (Id != null && ItemId > 0)
+                if (ItemId != null && ItemId > 0)
                     param.Append(String.Format("{0}={1}&","itemId", ItemId));
 
-                if (Id != null && PropertyId > 0)
+                if (PropertyId != null && PropertyId > 0)
                     param.Append(String.Format("{0}={1}&", "propertyId", PropertyId));
 
-                if (Id != null && FavouriteId > 0)
+                if (FavouriteId != null && FavouriteId > 0)
                     param.Append(String.Format("{0}={1}&", "favouriteId", FavouriteId));
 
                 if (UserId != null && !UserId.Equals(string.Empty))

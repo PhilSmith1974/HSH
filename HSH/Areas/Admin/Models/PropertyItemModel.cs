@@ -14,7 +14,7 @@ namespace HSH.Areas.Admin.Models
         [DisplayName("Item Id")]
         public int ItemId { get; set; }
         [DisplayName("Property Title")]
-        public string ProductTitle { get; set; }
+        public string PropertyTitle { get; set; }
         [DisplayName("Item Title")]
         public string ItemTitle { get; set; }
         public ICollection<Property>Propertys { get; set; }

@@ -54,7 +54,7 @@
             @Html.DropDownListFor(
            model => model.PropertyTypeId,
            Model.PropertyTypes.ToSelectListItem(Model.PropertyTypeId),
-           new { @class = new { @class = "form-control" } })
+           new { @class = "form-control" } )
             @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -65,7 +65,7 @@
             @Html.DropDownListFor(
            model => model.PropertyLinkTextId,
            Model.PropertyLinkTexts.ToSelectListItem(Model.PropertyLinkTextId),
-           new { @class = new { @class = "form-control" } })
+           new { @class =  "form-control" } )
             @Html.ValidationMessageFor(model => model.PropertyLinkTextId, "", new { @class = "text-danger" })
         </div>
     </div>
