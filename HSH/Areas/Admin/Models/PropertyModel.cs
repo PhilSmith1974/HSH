@@ -15,6 +15,7 @@ namespace HSH.Areas.Admin.Models
         public string Title { get; set; }
 
         [MaxLength(2048)]
+        [Required]
         public string Description { get; set; }
 
         [Required]
