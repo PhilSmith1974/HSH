@@ -48,7 +48,7 @@ namespace HSH.Areas.Admin.Controllers
                 Propertys = await db.Propertys.ToListAsync()
 
             };
-            return View();
+            return View(model);
         }
 
         // POST: Admin/PropertyItem/Create
@@ -56,7 +56,7 @@ namespace HSH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "PropertyId,ItemId,FavouriteId")] PropertyItem propertyItem)
+        public async Task<ActionResult> Create([Bind(Include = "PropertyId,ItemId")] PropertyItem propertyItem)
         {
             if (ModelState.IsValid)
             {
