@@ -25,18 +25,18 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/PropertyItem/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int? itemId, int? propertyId)
         {
-            if (id == null)
+            if (itemId == null || propertyId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            PropertyItem propertyItem = await GetPropertyItem(itemId, propertyId);
             if (propertyItem == null)
             {
                 return HttpNotFound();
             }
-            return View(propertyItem);
+            return View(await propertyItem.Convert(db));
         }
 
         // GET: Admin/PropertyItem/Create
@@ -69,18 +69,18 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/PropertyItem/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(int? itemId, int? propertyId )
         {
-            if (id == null)
+            if (itemId == null || propertyId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            PropertyItem propertyItem = await GetPropertyItem(itemId, propertyId);
             if (propertyItem == null)
             {
                 return HttpNotFound();
             }
-            return View(propertyItem);
+            return View(await propertyItem.Convert(db));
         }
 
         // POST: Admin/PropertyItem/Edit/5
@@ -88,12 +88,14 @@ namespace HSH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PropertyId,ItemId,FavouriteId")] PropertyItem propertyItem)
+        public async Task<ActionResult> Edit([Bind(Include = "PropertyId,ItemId,OldPropertyId,OldItemId")]
+        PropertyItem propertyItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(propertyItem).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                var canChange = await propertyItem.CanChange(db);
+                if (canChange)
+                    await propertyItem.Change(db);
                 return RedirectToAction("Index");
             }
             return View(propertyItem);
@@ -123,6 +125,23 @@ namespace HSH.Areas.Admin.Controllers
             db.PropertyItems.Remove(propertyItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+        private async Task<PropertyItem> GetPropertyItem (int? itemId,int? propertyId)
+        {
+            try
+            {
+                int itmId = 0, prtId =0;
+                int.TryParse(itemId.ToString(), out itmId);
+                int.TryParse(propertyId.ToString(), out prtId);
+                var propertyItem = await db.PropertyItems.FirstOrDefaultAsync(
+                    pi => pi.PropertyId.Equals(prtId) && pi.ItemId.Equals(itmId));
+                return propertyItem;
+            }
+            catch
+            {
+                return null;
+            }
+
         }
 
         protected override void Dispose(bool disposing)

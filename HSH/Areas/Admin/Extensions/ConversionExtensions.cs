@@ -8,7 +8,7 @@ using HSH.Models;
 using HSH.Entities;
 using System.Data.Entity;
 using System.Linq;
-
+using System.Transactions;
 
 namespace HSH.Areas.Admin.Extensions
 {
@@ -88,6 +88,74 @@ namespace HSH.Areas.Admin.Extensions
                                  p => p.Id.Equals(pi.PropertyId)).Title
 
                           }).ToListAsync();
+        }
+
+        public static async Task<PropertyItemModel> Convert(
+           this PropertyItem PropertyItem, ApplicationDbContext db,
+           bool addListData = true)
+        {
+            var model = new PropertyItemModel
+            {
+                ItemId = PropertyItem.ItemId,
+                PropertyId = PropertyItem.PropertyId,
+                Items = addListData ? await db.Items.ToListAsync() : null,
+                Propertys = addListData ? await db.Propertys.ToListAsync() : null,
+                ItemTitle = (await db.Items.FirstOrDefaultAsync( i=> i.Id.Equals(PropertyItem.ItemId))).Title,
+                PropertyTitle = (await db.Propertys.FirstOrDefaultAsync(p =>
+               p.Id.Equals(PropertyItem.PropertyId))).Title
+            };
+
+            return model;
+          
+        }
+
+        public static async Task <bool> CanChange(this PropertyItem propertyItem, ApplicationDbContext db)
+        {
+            var oldPI = await db.PropertyItems.CountAsync(pi => 
+                    pi.PropertyId.Equals(propertyItem.OldPropertyId) &&
+                    pi.ItemId.Equals(propertyItem.OldItemId));
+
+            var newPI = await db.PropertyItems.CountAsync(pi =>
+            pi.PropertyId.Equals(propertyItem.PropertyId) &&
+            pi.ItemId.Equals(propertyItem.ItemId));
+
+            return oldPI.Equals(1) && newPI.Equals(0);
+        }
+
+        public static async Task Change(
+            this PropertyItem propertyItem, ApplicationDbContext db)
+        {
+            var oldPropertyItem = await db.PropertyItems.FirstOrDefaultAsync(
+                pi => pi.PropertyId.Equals(propertyItem.OldPropertyId) &&
+                pi.ItemId.Equals(propertyItem.OldItemId));
+
+            var newPropertyItem = await db.PropertyItems.FirstOrDefaultAsync(
+                pi => pi.PropertyId.Equals(propertyItem.PropertyId) &&
+                pi.ItemId.Equals(propertyItem.ItemId));
+
+            if(oldPropertyItem != null && newPropertyItem == null)
+            {
+                 newPropertyItem = new PropertyItem
+                {
+                    ItemId = propertyItem.ItemId,
+                    PropertyId = propertyItem.PropertyId
+                };
+
+                using (var transaction = new TransactionScope(
+                    TransactionScopeAsyncFlowOption.Enabled))
+                {
+                    try
+                    {
+                        db.PropertyItems.Remove(oldPropertyItem);
+                        db.PropertyItems.Add(newPropertyItem);
+
+                        await db.SaveChangesAsync();
+                        transaction.Complete();
+                    }
+                    catch { transaction.Dispose(); }
+
+                }
+            }
         }
 
         #endregion
