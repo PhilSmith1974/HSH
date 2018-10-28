@@ -102,26 +102,26 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/PropertyItem/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int? itemId, int? propertyId)
         {
-            if (id == null)
+            if (itemId == null || propertyId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            PropertyItem propertyItem = await GetPropertyItem(itemId, propertyId);
             if (propertyItem == null)
             {
                 return HttpNotFound();
             }
-            return View(propertyItem);
+            return View(await propertyItem.Convert(db));
         }
 
         // POST: Admin/PropertyItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int itemId, int propertyId)
         {
-            PropertyItem propertyItem = await db.PropertyItems.FindAsync(id);
+            PropertyItem propertyItem = await GetPropertyItem(itemId,propertyId);
             db.PropertyItems.Remove(propertyItem);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
