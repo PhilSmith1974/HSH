@@ -13,18 +13,12 @@ namespace HSH.Entities
         [Required]
         [Key,Column(Order =1)]
         public int PropertyId { get; set; }
-
         [Required]
         [Key, Column(Order = 2)]
-        public int FavouriteId { get; set; }
-
-        
+        public int FavouriteId { get; set; }        
+        [NotMapped]
+        public int OldPropertyId { get; set; }
         [NotMapped]
         public int OldFavouriteId { get; set; }
-
-        [NotMapped]
-        public int OldItemId { get; set; }
-
-
     }
 }

@@ -295,6 +295,7 @@
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Extensions\ConversionExtensions.cs" />
     <Compile Include="Areas\Admin\Models\EditButtonModel.cs" />
+    <Compile Include="Areas\Admin\Models\FavouritePropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\PropertyItemModel.cs" />
     <Compile Include="Areas\Admin\Models\PropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\SmallButtonModel.cs" />
