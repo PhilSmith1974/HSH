@@ -285,6 +285,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\FavouriteController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FavouritePropertyController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\PartController.cs" />
@@ -480,6 +481,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\FavouriteProperty\" />
     <Folder Include="Areas\Estate Agent\" />
     <Folder Include="Areas\User Account\" />
     <Folder Include="Content\Documents\" />
