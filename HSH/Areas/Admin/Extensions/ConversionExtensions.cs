@@ -171,7 +171,7 @@ namespace HSH.Areas.Admin.Extensions
                           {
                               FavouriteId = pi.FavouriteId,
                               PropertyId = pi.PropertyId,
-                              FavouriteTitle = db.Items.FirstOrDefault(
+                              FavouriteTitle = db.Favourites.FirstOrDefault(
                                   i => i.Id.Equals(pi.FavouriteId)).Title,
                               PropertyTitle = db.Propertys.FirstOrDefault(
                                  p => p.Id.Equals(pi.PropertyId)).Title

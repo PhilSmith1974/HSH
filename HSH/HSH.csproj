@@ -421,6 +421,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Admin\Views\Shared\_EditButtonDetailPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\FavouriteProperty\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\FavouriteProperty\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\FavouriteProperty\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\FavouriteProperty\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\FavouriteProperty\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -481,7 +486,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\FavouriteProperty\" />
     <Folder Include="Areas\Estate Agent\" />
     <Folder Include="Areas\User Account\" />
     <Folder Include="Content\Documents\" />

@@ -14,6 +14,7 @@ using HSH.Areas.Admin.Models;
 
 namespace HSH.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class FavouritePropertyController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -25,18 +26,20 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/FavouriteProperty/Details/5
-        public async Task<ActionResult> Details(int? favouriteId, int? propertyId)
+        public async Task<ActionResult> Details(
+            int? favouriteId, int? propertyId)
         {
             if (favouriteId == null || propertyId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FavouriteProperty favouriteProperty = await GetFavouriteProperty(favouriteId, propertyId);
+            FavouriteProperty favouriteProperty = 
+                await GetFavouriteProperty(favouriteId, propertyId);
             if (favouriteProperty == null)
             {
                 return HttpNotFound();
             }
-            return View(favouriteProperty.Convert(db));
+            return View(await favouriteProperty.Convert(db));
         }
 
         // GET: Admin/FavouriteProperty/Create
@@ -56,7 +59,8 @@ namespace HSH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "PropertyId,FavouriteId")] FavouriteProperty favouriteProperty)
+        public async Task<ActionResult> Create(
+            [Bind(Include = "PropertyId,FavouriteId")] FavouriteProperty favouriteProperty)
         {
             if (ModelState.IsValid)
             {
@@ -69,18 +73,21 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/FavouriteProperty/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(
+            int? favouriteId, int? propertyId)
         {
-            if (id == null)
+            if (favouriteId == null || propertyId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FavouriteProperty favouriteProperty = await db.FavouritePropertys.FindAsync(id);
+            FavouriteProperty favouriteProperty = 
+                await GetFavouriteProperty(favouriteId, propertyId);
+
             if (favouriteProperty == null)
             {
                 return HttpNotFound();
             }
-            return View(favouriteProperty);
+            return View(await favouriteProperty.Convert(db));
         }
 
         // POST: Admin/FavouriteProperty/Edit/5
@@ -88,38 +95,45 @@ namespace HSH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PropertyId,FavouriteId")] FavouriteProperty favouriteProperty)
+        public async Task<ActionResult> Edit(
+            [Bind(Include = "PropertyId,FavouriteId,OldPropertyId,OldFavouriteId")]
+        FavouriteProperty favouriteProperty)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(favouriteProperty).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                var canChange = await favouriteProperty.CanChange(db);
+                if (canChange)
+                    await favouriteProperty.Change(db);
+
                 return RedirectToAction("Index");
             }
             return View(favouriteProperty);
         }
 
         // GET: Admin/FavouriteProperty/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(int? favouriteId, int? propertyId)
         {
-            if (id == null)
+            if (favouriteId == null || propertyId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FavouriteProperty favouriteProperty = await db.FavouritePropertys.FindAsync(id);
+            FavouriteProperty favouriteProperty = 
+                await GetFavouriteProperty(favouriteId, propertyId);
             if (favouriteProperty == null)
             {
                 return HttpNotFound();
             }
-            return View(favouriteProperty);
+            return View(await favouriteProperty.Convert(db));
         }
 
         // POST: Admin/FavouriteProperty/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(
+            int favouriteId, int propertyId)
         {
-            FavouriteProperty favouriteProperty = await db.FavouritePropertys.FindAsync(id);
+            FavouriteProperty favouriteProperty = 
+                await GetFavouriteProperty(favouriteId, propertyId);
             db.FavouritePropertys.Remove(favouriteProperty);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

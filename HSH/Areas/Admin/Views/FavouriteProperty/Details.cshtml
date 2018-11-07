@@ -1,0 +1,25 @@
+﻿@model HSH.Areas.Admin.Models.FavouritePropertyModel
+    @using HSH.Areas.Admin.Models
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Favourite Property</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.FavouriteTitle)</dt>
+        <dd>@Html.DisplayFor(model => model.FavouriteTitle)</dd>
+        <dt>@Html.DisplayNameFor(model => model.PropertyTitle)</dt>
+        <dd>@Html.DisplayFor(model => model.PropertyTitle)</dd>
+    </dl>
+</div>
+<p>
+    @Html.Partial("_EditButtonDetailPartial", 
+    new EditButtonModel {FavouriteId = Model.FavouriteId, PropertyId = Model.PropertyId })
+    @Html.Partial("_BackToListButtonPartial")
+</p>
+
