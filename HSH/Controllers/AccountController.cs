@@ -27,7 +27,7 @@ namespace HSH.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -39,9 +39,9 @@ namespace HSH.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -125,7 +125,7 @@ namespace HSH.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -156,7 +156,8 @@ namespace HSH.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
@@ -167,8 +168,8 @@ namespace HSH.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -501,5 +502,163 @@ namespace HSH.Controllers
 
             return View(users);
         }
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(UserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    IsActive = true,
+                    Registered = DateTime.Now,
+                    EmailConfirmed = true
+                };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+
+                    return RedirectToAction("Index", "Account");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+
+        public async Task<ActionResult> Edit(string userId)
+        {
+            if (userId == null || User.Identity.Equals(string.Empty))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new UserViewModel
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Id = user.Id,
+                Password = user.PasswordHash
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(UserViewModel model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    var user = await UserManager.FindByIdAsync(model.Id);
+                    if (user != null)
+                    {
+                        user.Email = model.Email;
+                        user.UserName = model.Email;
+                        user.FirstName = model.FirstName;
+                        if (!user.PasswordHash.Equals(model.Password))
+                            user.PasswordHash = UserManager.PasswordHasher
+                                .HashPassword(model.Password);
+
+                        var result = await UserManager.UpdateAsync(user);
+                        if (result.Succeeded)
+                        {
+                            return RedirectToAction("Action", "Account");
+                        }
+                        AddErrors(result);
+                    }
+                }
+            }
+            catch { }
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+
+        public async Task<ActionResult> Delete(string userId)
+        {
+            if (userId == null || User.Identity.Equals(string.Empty))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            var model = new UserViewModel
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Id = user.Id,
+                Password = "Fake Password"
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(UserViewModel model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (ModelState.IsValid)
+                {
+                    var user = await UserManager.FindByIdAsync(model.Id);
+                    var result = await UserManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        var db = new ApplicationDbContext();
+                        var favourites = db.UserFavourites.Where(
+                            u => u.UserId.Equals(user.Id));
+                        db.UserFavourites.RemoveRange(favourites);
+                        await db.SaveChangesAsync();
+
+                        return RedirectToAction("Index", "Account");
+                    }
+                    AddErrors(result);
+                }
+
+            }
+            catch { }
+            return View(model);
+        }
     }
 }
+
+    
+

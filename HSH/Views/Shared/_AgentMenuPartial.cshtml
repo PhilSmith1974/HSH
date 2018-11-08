@@ -1,0 +1,28 @@
+﻿@if(Request.IsAuthenticated && User.IsInRole("Agent"))
+{
+<li class="dropdown" data-admin-menu>
+    <a href="#">
+       Agent
+        <span class="glyphicon glyphicon-chevron-down">
+        </span> 
+    </a>
+    <ul class="dropdown-menu" role="menu">
+        @*Place our Menu items*@
+        <li class="dropdown-header">Agent Area</li>
+        <li class="dropdown-header">Major Entities</li>
+        <li class="divider" />
+        <li><a href="/Admin/Item">&nbsp;&nbsp;Item</a></li>
+        <li><a href="/Admin/Property">&nbsp;&nbsp;Property</a></li>
+        <li><a href="/Admin/Favourite">&nbsp;&nbsp;Favourite</a></li>
+        <li class="divider" />
+        <li class="dropdown-header">Connector Entities</li>
+        <li class="divider" />
+        <li><a href="/Admin/PropertyItem">&nbsp;&nbsp;Property Item</a></li>
+        <li><a href="/Admin/FavouriteProperty">&nbsp;&nbsp;Property Favourite</a></li>
+        <li class="divider" />
+        <li class="dropdown-header">Users & Favourites</li>
+        <li class="divider" />
+        <li> <a href="Account"> &nbsp;&nbsp; Users & Favourites</a>
+    </ul>
+</li>
+}
