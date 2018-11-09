@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<HSH.Models.ThumbnailAreaModel>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,12 +7,14 @@
 <div class="row">
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="col-md-12">
-            <h2>I'm Logged in</h2>
-        </div>
-    }
-    else
-    {
+        foreach (var area in Model)
+        {
+        @Html.Partial("_ThumbnailAreaPartial", area)
+        }
+     }
+
+     else
+            {
         //Left Column
         <div class="col-lg-9 col-md-8 col-sm-7">
             <h2>I'm Not Logged in</h2>

@@ -97,7 +97,7 @@ namespace HSH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Description,Price,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
         {
             if (ModelState.IsValid)
             {

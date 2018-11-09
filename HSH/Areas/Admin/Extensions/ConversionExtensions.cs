@@ -161,12 +161,12 @@ namespace HSH.Areas.Admin.Extensions
 
         #region Favourite Property
         public static async Task<IEnumerable<FavouritePropertyModel>> Convert(
-          this IQueryable<FavouriteProperty> FavouritePropertys, ApplicationDbContext db)
+          this IQueryable<FavouriteProperty> favouritePropertys, ApplicationDbContext db)
         {
-            if (FavouritePropertys.Count().Equals(0))
+            if (favouritePropertys.Count().Equals(0))
                 return new List<FavouritePropertyModel>();
 
-            return await (from pi in FavouritePropertys
+            return await (from pi in favouritePropertys
                           select new FavouritePropertyModel
                           {
                               FavouriteId = pi.FavouriteId,
@@ -203,13 +203,13 @@ namespace HSH.Areas.Admin.Extensions
             this FavouriteProperty favouriteProperty,
             ApplicationDbContext db)
         {
-            var oldFP = await db.PropertyItems.CountAsync(fp =>
+            var oldFP = await db.FavouritePropertys.CountAsync(fp =>
                     fp.PropertyId.Equals(favouriteProperty.OldPropertyId) &&
                     fp.FavouriteId.Equals(favouriteProperty.OldFavouriteId));
 
-            var newFP = await db.PropertyItems.CountAsync(fp =>
+            var newFP = await db.FavouritePropertys.CountAsync(fp =>
             fp.PropertyId.Equals(favouriteProperty.PropertyId) &&
-            fp.ItemId.Equals(favouriteProperty.OldFavouriteId));
+            fp.FavouriteId.Equals(favouriteProperty.FavouriteId));
 
             return oldFP.Equals(1) && newFP.Equals(0);
         }
