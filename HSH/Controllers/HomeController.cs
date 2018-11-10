@@ -12,20 +12,21 @@ namespace HSH.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task <ActionResult> Index()
+        public async Task<ActionResult> Index()
         {
             var userId = Request.IsAuthenticated ? HttpContext.User.Identity.GetUserId() : null;
-            var thumbnails = await new List<ThumbnailModel>().GetPropertyThumbnailAsync(userId);
+            var thumbnails = await new List<ThumbnailModel>().GetPropertyThumbnailsAsync(userId);
 
             var count = thumbnails.Count() / 4;
             var model = new List<ThumbnailAreaModel>();
-            for(int i = 0; i <= count; i++)
-
-            model.Add(new ThumbnailAreaModel
-            {
-                Title = i.Equals(0) ? "My Content" : string.Empty,
-                Thumbnails = thumbnails.Skip(i * 4).Take(4)
-            });
+            for (int i = 0; i <= count; i++)
+            { 
+                model.Add(new ThumbnailAreaModel
+                {
+                    Title = i.Equals(0) ? "My Content" : string.Empty,
+                    Thumbnails = thumbnails.Skip(i * 4).Take(4)
+                });
+            }
             
             return View(model);
         }

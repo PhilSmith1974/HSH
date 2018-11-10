@@ -12,7 +12,7 @@ namespace HSH.Extensions
     public static class ThumbnailExtensions
     {
 
-        private static async Task<List<int>> GetFavouriteIdAsync(
+        private static async Task<List<int>> GetFavouriteIdsAsync(
             string userId = null, ApplicationDbContext db = null)
         {
             try
@@ -28,7 +28,8 @@ namespace HSH.Extensions
             catch { }
             return new List<int>();
         }
-        public static async Task<IEnumerable<ThumbnailModel>> GetPropertyThumbnailAsync(
+
+        public static async Task<IEnumerable<ThumbnailModel>> GetPropertyThumbnailsAsync(
     this List<ThumbnailModel> thumbnails, string userId = null,
     ApplicationDbContext db = null)
         {
@@ -37,7 +38,7 @@ namespace HSH.Extensions
                 if (userId == null) return new List<ThumbnailModel>();
                 if (db == null) db = ApplicationDbContext.Create();
 
-                var favouriteIds = await GetFavouriteIdAsync(userId, db);
+                var favouriteIds = await GetFavouriteIdsAsync(userId, db);
 
                 thumbnails = await (
                     from pf in db.FavouritePropertys
@@ -52,6 +53,7 @@ namespace HSH.Extensions
                         Title = p.Title,
                         Description = p.Description,
                         ImageUrl = p.ImageUrl,
+                        Price = p.Price,
                         Link = "/PropertyContent/Index/" + p.Id,
                         TagText = plt.Title,
                         ContentTag = pt.Title

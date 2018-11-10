@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/HSH")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <script src="http://content.jwplatform.com/libraries/DF34D345.js"></script>
 </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -20,13 +20,9 @@
                     <span class="icon-bar navbar-inverse"></span>
                 </button>
                 <a class="navbar-brand" href="Home/Index/">
-                    @*<img src="~/Content/Logos/hshLogoSmallGreenPNG 30x152.png" class=" =" visible-xs />*@
-                    @*<img src="~/Content/Logos/hshsmall 666x375 .png" class=" ="visible-xs />*@
-                    @*<img src="~/Content/Logos/hshLogoSmallGreenPNG 45x184.png"  class=" =" visible-xs />*@
-                    <img src="~/Content/Logos/HSHLogo 30x152.png" class ="visible-xs" />
-                    <img src="~/Content/Logos/HSHLogo 45x184.png" class ="hidden-xs"/>
+                    <img src="~/Content/Logos/HSHLogo 30x152.png" class="visible-xs" />
+                    <img src="~/Content/Logos/HSHLogo 45x184.png" class="hidden-xs" />
                 </a>
-                @*@Html.ActionLink("HomeSweetHome", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -49,8 +45,10 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/admin")
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/admin")
+    @Scripts.Render("~/bundles/ui")
+    @Styles.Render("~/Content/HSH")
 
 
 </body>
