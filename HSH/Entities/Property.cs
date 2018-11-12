@@ -21,6 +21,8 @@ namespace HSH.Entities
 
         public string Description { get; set; }
 
+
+
         [Required]
         public double Price { get; set; }
 

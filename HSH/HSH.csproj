@@ -48,9 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autoaddress2.0SDK, Version=1.0.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autoaddress.Autoaddress2.0SDK.1.0.13\lib\netstandard1.1\Autoaddress2.0SDK.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.8.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -331,6 +328,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ThumbnailAreaModel.cs" />
     <Compile Include="Models\ThumbnailModel.cs" />
+    <Compile Include="Models\UserFavouriteModel.cs" />
+    <Compile Include="Models\UserFavouriteViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -496,6 +495,7 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Shared\_ThumbnailAreaPartial.cshtml" />
+    <Content Include="Views\Account\Favourites.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

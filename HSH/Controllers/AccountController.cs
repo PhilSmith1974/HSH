@@ -15,6 +15,7 @@ using System.Net;
 using System.Data.Entity;
 using HSH.Entities;
 
+
 namespace HSH.Controllers
 {
     [Authorize]
@@ -657,6 +658,75 @@ namespace HSH.Controllers
             catch { }
             return View(model);
         }
+
+
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Favourites(string userId)
+        {
+            if (userId == null || User.Identity.Equals(string.Empty))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var model = new UserFavouriteViewModel();
+            var db = new ApplicationDbContext();
+            model.UserFavourites = await
+                (from us in db.UserFavourites
+                 join s in db.Favourites on us.FavouriteId equals s.Id
+                 where us.UserId.Equals(userId)
+                 select new UserFavouriteModel
+                 {
+                     Id = us.FavouriteId,
+                     StartDate = us.StartDate,
+                     EndDate = us.EndDate,
+                     Description = s.Description,
+                     RegisterationCode = s.RegisterationCode,
+                     Title = s.Title
+
+                 }).ToListAsync();
+
+            var ids = model.UserFavourites.Select(us => us.Id);
+
+            model.Favourites = await db.Favourites.Where(
+                s => !ids.Contains(s.Id)).ToListAsync();
+
+            model.DisableDropDown = model.Favourites.Count.Equals(0);
+            model.UserId = userId;
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> Favourites(
+            UserFavouriteViewModel model)
+        {
+            try
+            {
+                if (model == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                if (ModelState.IsValid)
+                {
+                        var db = new ApplicationDbContext();
+                    db.UserFavourites.Add(new UserFavourite
+                    {
+                        UserId = model.UserId,
+                        FavouriteId = model.FavouriteId,
+                        StartDate = DateTime.Now,
+                        EndDate = DateTime.MaxValue
+                    });
+                    await db.SaveChangesAsync();
+                       
+                }
+
+            }
+            catch { }
+            return RedirectToAction("Favourites", "Account", new { userId = model.UserId });
+        }
+
+
+
     }
 }
 
