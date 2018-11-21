@@ -42,7 +42,7 @@ namespace HSH
             bundles.Add(new StyleBundle("~/Content/hsh").Include(
                 "~/Content/navbar.css",
                 "~/Content/thumbnails.css",
-                "~/Content/ProductContent.css",
+                "~/Content/propertyContent.css",
                 "~/Content/Carret.css",
                 "~/Content/html.css",
                 "~/Content/RegisterCode.css",
@@ -50,8 +50,6 @@ namespace HSH
                 "~/Content/login.css",
                 "~/Content/forgot-password.css"
                 ));
-
-
         }
     }
 }

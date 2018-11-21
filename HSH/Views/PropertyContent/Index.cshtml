@@ -3,12 +3,16 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="headline">
+
+<div class="pc-headline">
     <h2>@Model.Title</h2>
     <a class="btn btn-primary pull-right" href="/Home/Index/">
         <span class="glyphicon glyphicon-arrow-left"></span>
         Back
-        </a>
+    </a>
 </div>
+@Html.Partial("_PropertySectionPartial", Model.Sections)
+
+@*@Html.Partial("_PropertySectionPartial", Model.Sections)*@
 
 

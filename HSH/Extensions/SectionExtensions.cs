@@ -11,7 +11,8 @@ namespace HSH.Extensions
 {
     public static class SectionExtensions
     {
-        public static async Task<PropertySectionModel> GetPropertySectionsAsync(int propertyId, string userId)
+        public static async Task<PropertySectionModel> GetPropertySectionsAsync(
+            int propertyId, string userId)
         {
             var db = ApplicationDbContext.Create();
 
@@ -22,7 +23,7 @@ namespace HSH.Extensions
                 join s in db.Sections on i.SectionId equals s.Id
                 where p.Id.Equals(propertyId)
                 orderby s.Title
-                select new PropertySection
+                select new PropertySection 
                 {
                     Id = s.Id,
                     ItemTypeId = i.ItemTypeId,
