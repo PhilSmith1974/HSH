@@ -43,7 +43,7 @@ namespace HSH
                 "~/Content/navbar.css",
                 "~/Content/thumbnails.css",
                 "~/Content/propertyContent.css",
-                "~/Content/Carret.css",
+                "~/Content/carret.css",
                 "~/Content/html.css",
                 "~/Content/RegisterCode.css",
                 "~/Content/RegisterUser.css",

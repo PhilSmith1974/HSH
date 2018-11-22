@@ -11,3 +11,27 @@
 .pc-headline h2{
    font-size: 22px;
 }
+.property-item * {
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+
+.property-item h2 {
+    margin-top: 2px;
+    font-size: 22px;
+}
+
+.property-item a {
+    text-decoration: none;
+}
+
+.property-item .line-bottom {
+    border-bottom: 1px solid #E4E9F0;
+}
+
+.property-item .min-height {
+    min-height: 90px;
+}
+
+.video-margin {
+    margin-left: 0px;
+}
