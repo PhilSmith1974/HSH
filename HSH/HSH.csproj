@@ -332,6 +332,7 @@
     <Compile Include="Models\PropertyItemRow.cs" />
     <Compile Include="Models\PropertySection.cs" />
     <Compile Include="Models\PropertySectionModel.cs" />
+    <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\ThumbnailAreaModel.cs" />
     <Compile Include="Models\ThumbnailModel.cs" />
     <Compile Include="Models\UserFavouriteModel.cs" />
@@ -350,6 +351,7 @@
     <Content Include="Content\Logos\HSHLogo 45x184.png" />
     <Content Include="Content\navbar.css" />
     <Content Include="Content\propertyContent.css" />
+    <Content Include="Content\RegisterUser.css" />
     <Content Include="Content\thumbnails.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -368,6 +370,7 @@
     <Content Include="Areas\Admin\Views\Section\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Index.cshtml" />
     <Content Include="Scripts\carret.js" />
+    <Content Include="Scripts\RegisterUser.js" />
     <Content Include="Views\Shared\_BackToListButtonPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_EditButtonPartial.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -442,6 +445,7 @@
     <Content Include="Areas\Admin\Views\FavouriteProperty\Details.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\HSH20181124042256 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -508,6 +512,7 @@
     <Content Include="Views\PropertyContent\Index.cshtml" />
     <Content Include="Views\PropertyContent\_PropertySectionPartial.cshtml" />
     <Content Include="Views\PropertyContent\_PropertyItemRowPartial.cshtml" />
+    <Content Include="Views\Shared\_RegisterUserPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
