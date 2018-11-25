@@ -30,6 +30,7 @@ namespace HSH.Entities
         public string ImageUrl { get; set; }
         public int PropertyLinkTextId { get; set; }
         public int PropertyTypeID { get; set; }
-      
+
+        public Address Address { get; set; }
     }
 }
