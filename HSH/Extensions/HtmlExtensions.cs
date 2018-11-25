@@ -8,7 +8,7 @@ namespace HSH.Extensions
 {
     public static class HtmlExtensions
     {
-        public static MvcHtmlString GlypgLink(this HtmlHelper htmlHelper,
+        public static MvcHtmlString GlyphLink(this HtmlHelper htmlHelper,
             string controller, string action, string text, string glyphicon,
             string cssClasses = "", string id = "",
             Dictionary<string, string> attributes = null)

@@ -9,12 +9,17 @@ namespace HSH.Areas.Admin.Models
 {
     public class PropertyModel
     {
+
+        public PropertyModel()
+        {
+            Address = new AddressModel();
+        }
+
+
         public int Id { get; set; }
         [MaxLength(255)]
         [Required]
         public string Title { get; set; }
-
-
 
         [MaxLength(2048)]
         [Required]
@@ -23,6 +28,10 @@ namespace HSH.Areas.Admin.Models
         [Required]
         [DisplayName("Price € ")]
         public double Price { get; set; }
+
+        [Required]
+        [DisplayName("Address")]
+        public AddressModel Address { get; set; }
 
         [MaxLength(1024)]
         [DisplayName("Image Url")]

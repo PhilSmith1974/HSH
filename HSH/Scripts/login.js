@@ -27,7 +27,7 @@
             var hasErrors = $(parsed).find("[data-valmsg-summary]").text()
                 .replace(/\n|\r/g, "").length > 0;
 
-            if (hasErrors == true) {
+            if (hasErrors === true) {
                 $('div[data-login-panel-partial]').html(data);
                 $('div[data-login-user-area]').addClass('open');
                 $('#Email').addClass('data-login-error');

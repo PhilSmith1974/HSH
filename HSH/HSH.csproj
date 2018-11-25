@@ -281,6 +281,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AddressController.cs" />
     <Compile Include="Areas\Admin\Controllers\FavouriteController.cs" />
     <Compile Include="Areas\Admin\Controllers\FavouritePropertyController.cs" />
     <Compile Include="Areas\Admin\Controllers\ItemController.cs" />
@@ -292,6 +293,8 @@
     <Compile Include="Areas\Admin\Controllers\PropertyTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Extensions\ConversionExtensions.cs" />
+    <Compile Include="Areas\Admin\Models\Addresses.cs" />
+    <Compile Include="Areas\Admin\Models\AddressModel.cs" />
     <Compile Include="Areas\Admin\Models\EditButtonModel.cs" />
     <Compile Include="Areas\Admin\Models\FavouritePropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\PropertyItemModel.cs" />
@@ -305,6 +308,7 @@
     <Compile Include="Controllers\PropertyContentController.cs" />
     <Compile Include="Domain\Config.cs" />
     <Compile Include="Domain\Twilio\TwilioMessageSender.cs" />
+    <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\ItemType.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Favourite.cs" />
@@ -517,6 +521,7 @@
     <Content Include="Views\PropertyContent\_PropertyItemRowPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterUserPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPanelPartial.cshtml" />
+    <Content Include="Views\Shared\_AddressPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
