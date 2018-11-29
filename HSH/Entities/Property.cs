@@ -21,7 +21,9 @@ namespace HSH.Entities
 
         public string Description { get; set; }
 
-
+        [MaxLength(3)]
+        [Required]
+        public int NumberOfBedrooms { get; set; }
 
         [Required]
         public double Price { get; set; }

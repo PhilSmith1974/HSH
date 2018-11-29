@@ -18,6 +18,7 @@ using Twilio.Clients;
 using System.Configuration;
 using HSH.Domain.Twilio;
 using HSH.Domain;
+using HSH.Extensions;
 
 namespace HSH
 {
@@ -26,6 +27,7 @@ namespace HSH
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
+            message.Send();
             return Task.FromResult(0);
         }
     }

@@ -133,6 +133,7 @@ namespace HSH.Areas.Admin.Controllers
             Property property = await db.Propertys.FindAsync(id);
             db.Propertys.Remove(property);
             await db.SaveChangesAsync();
+        
             return RedirectToAction("Index");
         }
 
@@ -144,5 +145,8 @@ namespace HSH.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+       
+        }
     }
-}
+

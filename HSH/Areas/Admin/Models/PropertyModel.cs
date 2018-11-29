@@ -25,6 +25,10 @@ namespace HSH.Areas.Admin.Models
         [Required]
         public string Description { get; set; }
 
+        [MaxLength(3)]
+        [Required]
+        public int NumberOfBedrooms { get; set; }
+
         [Required]
         [DisplayName("Price € ")]
         public double Price { get; set; }

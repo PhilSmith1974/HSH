@@ -320,6 +320,7 @@
     <Compile Include="Entities\Part.cs" />
     <Compile Include="Entities\Section.cs" />
     <Compile Include="Entities\UserFavourite.cs" />
+    <Compile Include="Extensions\EmalExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Extensions\ICollectionExtensions.cs" />
@@ -335,6 +336,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PropertyItemRow.cs" />
+    <Compile Include="Areas\Admin\Models\PropertySearchModel.cs" />
     <Compile Include="Models\PropertySection.cs" />
     <Compile Include="Models\PropertySectionModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
@@ -352,6 +354,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carret.css" />
+    <Content Include="Content\forgot-password.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Logos\HSHLogo 30x152.png" />
     <Content Include="Content\Logos\HSHLogo 45x184.png" />
@@ -376,6 +379,7 @@
     <Content Include="Areas\Admin\Views\Section\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Index.cshtml" />
     <Content Include="Scripts\carret.js" />
+    <Content Include="Scripts\forgot-password.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\RegisterUser.js" />
     <Content Include="Views\Shared\_BackToListButtonPartial.cshtml" />
@@ -522,6 +526,7 @@
     <Content Include="Views\Shared\_RegisterUserPartial.cshtml" />
     <Content Include="Views\Shared\_LoginPanelPartial.cshtml" />
     <Content Include="Views\Shared\_AddressPartialView.cshtml" />
+    <Content Include="Views\Shared\_ForgotPasswordPanelPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

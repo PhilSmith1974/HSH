@@ -16,7 +16,8 @@ namespace HSH.Areas.Admin.Controllers
         {
             // API/search key - MUST be supplied to unlock search, 
             // if this is blank a restricted key is used which limits search to NR147PZ
-            string searchKey = "PCWXP-L3KTM-MK7M3-TNNSH";
+            string searchKey = "PCW5S-L9L9X-TQM9C-TZHCV";
+            //PCWXP - L3KTM - MK7M3 - TNNSH
             // processing type - for other options see 
             string method = "address";
 
@@ -28,7 +29,7 @@ namespace HSH.Areas.Admin.Controllers
             try
             {
                 // format the url		
-                string uri = String.Format("http://ws.postcoder.com/pcw/{0}/{1}/UK/{2}",
+                string uri = String.Format("http://ws.postcoder.com/pcw/{0}/{1}/IE/{2}",
                                                 searchKey,
                                                 method,
                                                 System.Uri.EscapeDataString(searchTerm)
