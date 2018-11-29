@@ -456,7 +456,7 @@
     <Content Include="Areas\Admin\Views\FavouriteProperty\Details.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\HSH20181124042256 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\HSHproperty - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

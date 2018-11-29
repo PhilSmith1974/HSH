@@ -24,8 +24,7 @@ namespace HSH.Areas.Admin.Models
         [MaxLength(2048)]
         [Required]
         public string Description { get; set; }
-
-        [MaxLength(3)]
+        
         [Required]
         public int NumberOfBedrooms { get; set; }
 

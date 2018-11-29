@@ -591,7 +591,7 @@ namespace HSH.Controllers
                         var result = await UserManager.UpdateAsync(user);
                         if (result.Succeeded)
                         {
-                            return RedirectToAction("Action", "Account");
+                            return RedirectToAction("Index", "Account");
                         }
                         AddErrors(result);
                     }
