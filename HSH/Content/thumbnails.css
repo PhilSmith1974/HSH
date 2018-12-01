@@ -35,7 +35,7 @@
 
     .thumbnail .thumbnail-img {
         width: 100%;
-        height: auto;
+        height: 200px;
         transition: all 0.8s ease-in-out 0s;
     }
 

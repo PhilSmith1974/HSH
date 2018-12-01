@@ -354,7 +354,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carret.css" />
+    <Content Include="Content\Documents\PDF image.jpg" />
     <Content Include="Content\forgot-password.css" />
+    <Content Include="Content\Images\document.jpg" />
+    <Content Include="Content\Images\HollyBankAvenue.jpg" />
+    <Content Include="Content\Images\LandsdownPlace.jpg" />
+    <Content Include="Content\Images\Landstown 668_445.jpg" />
+    <Content Include="Content\Images\laptop.jpg" />
+    <Content Include="Content\Images\Mayden.jpg" />
+    <Content Include="Content\Images\OliveLodge1.jpg" />
+    <Content Include="Content\Images\PDF image.jpg" />
+    <Content Include="Content\Images\Video.png" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Logos\HSHLogo 30x152.png" />
     <Content Include="Content\Logos\HSHLogo 45x184.png" />
@@ -456,6 +466,9 @@
     <Content Include="Areas\Admin\Views\FavouriteProperty\Details.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Index.cshtml" />
+    <Content Include="Content\Documents\Draft Deed.pdf" />
+    <Content Include="Content\Documents\Beltany Company.pdf" />
+    <Content Include="Content\Documents\BER Certificate.pdf" />
     <None Include="Properties\PublishProfiles\HSHproperty - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -532,8 +545,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Estate Agent\" />
     <Folder Include="Areas\User Account\" />
-    <Folder Include="Content\Documents\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
