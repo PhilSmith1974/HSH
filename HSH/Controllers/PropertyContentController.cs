@@ -20,5 +20,11 @@ namespace HSH.Controllers
             var sections = await SectionExtensions.GetPropertySectionsAsync(id, userId);
             return View(sections);
         }
+
+        public async Task<ActionResult> Content(int propertyId, int itemId)
+        {
+            var model = await SectionExtensions.GetContentAsync(propertyId, itemId);
+            return View("Content", model);
+        }
     }
 }

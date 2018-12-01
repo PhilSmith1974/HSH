@@ -33,7 +33,7 @@ namespace HSH.Areas.Admin.Extensions
                        Price = p.Price,
                        ImageUrl = p.ImageUrl,
                        PropertyLinkTextId = p.PropertyLinkTextId,
-                       PropertyTypeId = p.PropertyTypeID,
+                       PropertyTypeId = p.PropertyTypeId,
                        PropertyLinkTexts = texts,
                        PropertyTypes = types
                    };
@@ -46,7 +46,7 @@ namespace HSH.Areas.Admin.Extensions
             var text = await db.PropertyLinkTexts.FirstOrDefaultAsync(
                 p => p.Id.Equals(property.PropertyLinkTextId));
             var type = await db.PropertyTypes.FirstOrDefaultAsync(
-                p => p.Id.Equals(property.PropertyTypeID));
+                p => p.Id.Equals(property.PropertyTypeId));
 
 
             var model = new PropertyModel
@@ -57,7 +57,7 @@ namespace HSH.Areas.Admin.Extensions
                 Price = property.Price,
                 ImageUrl = property.ImageUrl,
                 PropertyLinkTextId = property.PropertyLinkTextId,
-                PropertyTypeId = property.PropertyTypeID,
+                PropertyTypeId = property.PropertyTypeId,
                 PropertyLinkTexts = new List<PropertyLinkText>(),
                 PropertyTypes = new List<PropertyType>()
             };
@@ -159,7 +159,7 @@ namespace HSH.Areas.Admin.Extensions
         }
     #endregion
 
-        #region Favourite Property
+    #region Favourite Property
         public static async Task<IEnumerable<FavouritePropertyModel>> Convert(
           this IQueryable<FavouriteProperty> favouritePropertys, ApplicationDbContext db)
         {

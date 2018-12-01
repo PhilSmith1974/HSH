@@ -1,10 +1,11 @@
-﻿using HSH.Models;
+﻿//using HSH.Models;
 using System.Collections.Generic;
+using HSH.Models;
 
 
 namespace HSH.Comparers
 {
-    public class PropertySectionEqualityComparer : IEqualityComparer<PropertySection>
+    public class PropertySectionEqualityComparer : IEqualityComparer<PropertySection> 
     {
         public bool Equals(PropertySection section1, PropertySection section2)
         {

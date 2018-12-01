@@ -1,11 +1,11 @@
-﻿using HSH.Comparers;
-using HSH.Models;
+﻿using HSH.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using HSH.Comparers;
 
 namespace HSH.Extensions
 {
@@ -22,7 +22,7 @@ namespace HSH.Extensions
                 join i in db.Items on pi.ItemId equals i.Id
                 join s in db.Sections on i.SectionId equals s.Id
                 where p.Id.Equals(propertyId)
-                orderby s.Id
+                orderby s.Title
                 select new PropertySection 
                 {
                     Id = s.Id,
@@ -82,5 +82,24 @@ namespace HSH.Extensions
 
             return items;
         }
+
+        public static async Task<ContentViewModel> GetContentAsync(
+       int procuctId, int itemId)
+        {
+            var db = ApplicationDbContext.Create();
+            return await (
+                from i in db.Items
+                join it in db.ItemTypes on i.ItemTypeId equals it.Id
+                where i.Id.Equals(itemId)
+                select new ContentViewModel
+                {
+                    PropertyId = procuctId,
+                    HTML = i.HTML,
+                    VideoURL = i.Url,
+                    Title = i.Title,
+                    Description = i.Description
+                }).FirstOrDefaultAsync();
+        }
+
     }
 }

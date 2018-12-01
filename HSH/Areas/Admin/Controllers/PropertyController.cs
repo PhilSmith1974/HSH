@@ -11,6 +11,7 @@ using HSH.Entities;
 using HSH.Models;
 using HSH.Areas.Admin.Extensions;
 using HSH.Areas.Admin.Models;
+using System.Transactions;
 //using System.Transactions;
 
 namespace HSH.Areas.Admin.Controllers
@@ -131,9 +132,29 @@ namespace HSH.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Property property = await db.Propertys.FindAsync(id);
-            db.Propertys.Remove(property);
-            await db.SaveChangesAsync();
-        
+
+
+            //db.Propertys.Remove(property);
+            //await db.SaveChangesAsync();
+            using (var transaction = new TransactionScope(
+                        TransactionScopeAsyncFlowOption.Enabled))
+            {
+                try
+                {
+                    var propItems = db.PropertyItems.Where(
+                        pi => pi.PropertyId.Equals(id));
+                    var propFav = db.FavouritePropertys.Where(
+                        sp => sp.PropertyId.Equals(id));
+                    db.PropertyItems.RemoveRange(propItems);
+                    db.FavouritePropertys.RemoveRange(propFav);
+                    db.Propertys.Remove(property);
+
+                    await db.SaveChangesAsync();
+                    transaction.Complete();
+                }
+                catch { transaction.Dispose(); }
+            }
+
             return RedirectToAction("Index");
         }
 

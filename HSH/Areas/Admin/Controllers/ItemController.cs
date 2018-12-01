@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using HSH.Entities;
 using HSH.Models;
+using System.Transactions;
 
 namespace HSH.Areas.Admin.Controllers
 {
@@ -123,8 +124,23 @@ namespace HSH.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Item item = await db.Items.FindAsync(id);
-            db.Items.Remove(item);
-            await db.SaveChangesAsync();
+            //db.Items.Remove(item);
+            //await db.SaveChangesAsync();
+            using (var transaction = new TransactionScope(
+                    TransactionScopeAsyncFlowOption.Enabled))
+            {
+                try
+                {
+                    var prodItems = db.PropertyItems.Where(
+                        pi => pi.ItemId.Equals(id));
+                    db.PropertyItems.RemoveRange(prodItems);
+                    db.Items.Remove(item);
+
+                    await db.SaveChangesAsync();
+                    transaction.Complete();
+                }
+                catch { transaction.Dispose(); }
+            }
             return RedirectToAction("Index");
         }
 

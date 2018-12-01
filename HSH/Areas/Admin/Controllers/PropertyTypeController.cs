@@ -113,8 +113,16 @@ namespace HSH.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             PropertyType propertyType = await db.PropertyTypes.FindAsync(id);
-            db.PropertyTypes.Remove(propertyType);
-            await db.SaveChangesAsync();
+
+            //db.PropertyTypes.Remove(propertyType);
+            //await db.SaveChangesAsync();
+            var isUnused = await db.Propertys.CountAsync(i => i.PropertyTypeId.Equals(id)) == 0;
+            if (isUnused)
+            {
+                db.PropertyTypes.Remove(propertyType);
+                await db.SaveChangesAsync();
+            }
+
             return RedirectToAction("Index");
         }
 

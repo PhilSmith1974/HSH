@@ -71,7 +71,7 @@ namespace HSH.Controllers
                 //}
                 if (searchModel.PropertyType.HasValue)
                 {
-                    result = result.Where(t => t.PropertyTypeID <= searchModel.PropertyType);
+                    result = result.Where(t => t.PropertyTypeId <= searchModel.PropertyType);
                 }
 
                 //Price 

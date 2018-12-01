@@ -44,7 +44,7 @@ namespace HSH.Extensions
                     from pf in db.FavouritePropertys
                     join p in db.Propertys on pf.PropertyId equals p.Id
                     join plt in db.PropertyLinkTexts on p.PropertyLinkTextId equals plt.Id
-                    join pt in db.PropertyTypes on p.PropertyTypeID equals pt.Id
+                    join pt in db.PropertyTypes on p.PropertyTypeId equals pt.Id
                     where favouriteIds.Contains(pf.FavouriteId)
                     select new ThumbnailModel
                     {

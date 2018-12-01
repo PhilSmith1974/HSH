@@ -113,8 +113,20 @@ namespace HSH.Areas.Admin.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             PropertyLinkText propertyLinkText = await db.PropertyLinkTexts.FindAsync(id);
-            db.PropertyLinkTexts.Remove(propertyLinkText);
-            await db.SaveChangesAsync();
+
+
+            //db.PropertyLinkTexts.Remove(propertyLinkText);
+            //await db.SaveChangesAsync();
+            var isUnused = await db.Propertys.CountAsync(i => i.PropertyLinkTextId.Equals(id)) == 0;
+            if (isUnused)
+            {
+                db.PropertyLinkTexts.Remove(propertyLinkText);
+                await db.SaveChangesAsync();
+            }
+
+
+
+
             return RedirectToAction("Index");
         }
 

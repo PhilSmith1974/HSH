@@ -14,6 +14,7 @@ using HSH.Areas.Admin.Extensions;
 
 namespace HSH.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin,Agent")]
     public class PropertyItemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -119,7 +120,8 @@ namespace HSH.Areas.Admin.Controllers
         // POST: Admin/PropertyItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int itemId, int propertyId)
+        public async Task<ActionResult> DeleteConfirmed(
+            int itemId, int propertyId)
         {
             PropertyItem propertyItem = await GetPropertyItem(itemId,propertyId);
             db.PropertyItems.Remove(propertyItem);

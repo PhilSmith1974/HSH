@@ -300,7 +300,7 @@
     <Compile Include="Areas\Admin\Models\PropertyItemModel.cs" />
     <Compile Include="Areas\Admin\Models\PropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\SmallButtonModel.cs" />
-    <Compile Include="Comparers\ProductSectionEqualityComparer.cs" />
+    <Compile Include="Comparers\PropertySectionEqualityComparer.cs" />
     <Compile Include="Comparers\ThumbnailEqualityComparer.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -333,6 +333,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ContentViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PropertyItemRow.cs" />
@@ -540,10 +541,10 @@
     <Content Include="Views\Shared\_LoginPanelPartial.cshtml" />
     <Content Include="Views\Shared\_AddressPartialView.cshtml" />
     <Content Include="Views\Shared\_ForgotPasswordPanelPartial.cshtml" />
+    <Content Include="Views\PropertyContent\Content.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Estate Agent\" />
     <Folder Include="Areas\User Account\" />
   </ItemGroup>
   <ItemGroup>
