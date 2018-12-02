@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<HSH.Models.ThumbnailAreaModel>
-    @using HSH.Models
+    
+@using HSH.Models
+@using HSH.Areas.Admin.Models
 @{
     ViewBag.Title = "";
 }
@@ -10,12 +12,12 @@
     {
         foreach (var area in Model)
         {
-        @Html.Partial("_ThumbnailAreaPartial", area)
+            @Html.Partial("_ThumbnailAreaPartial", area)
         }
-     }
+    }
 
-     else
-            {
+    else
+    {
         //Left Column
         <div class="col-lg-9 col-md-8 col-sm-7">
             <h2>I'm Not Logged in</h2>
@@ -31,3 +33,5 @@
 
 
 </div>
+
+

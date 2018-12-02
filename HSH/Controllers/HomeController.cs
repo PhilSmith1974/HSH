@@ -54,24 +54,21 @@ namespace HSH.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         // Search Property
 
+        public ActionResult Search()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public async Task<ActionResult> SearchIndex(PropertySearchModel searchModel)
         {
             var result = db.Propertys.AsQueryable();
             if (searchModel != null)
             {
+                //Keyword
                 if (!string.IsNullOrEmpty(searchModel.TitleKeyword))
                 {
                     result = result.Where(t => t.Title.Contains(searchModel.TitleKeyword));
-                }
-                //Property Type
-                //if (!string.IsNullOrEmpty(searchModel.PropertyType))
-                //{
-                //    result = result.Where(t => t.PropertyType.Model.Equals(searchModel.PropertyType));
-                //}
-                if (searchModel.PropertyType.HasValue)
-                {
-                    result = result.Where(t => t.PropertyTypeId <= searchModel.PropertyType);
                 }
 
                 //Price 
@@ -79,6 +76,29 @@ namespace HSH.Controllers
                 {
                     result = result.Where(t => t.Price <= searchModel.Price);
                 }
+                //Property Type (Int to String.....)
+                //if (!string.IsNullOrEmpty(searchModel.PropertyType))
+                //{
+                //    result = result.Where(t => t.PropertyType.Model.Equals(searchModel.PropertyType));
+                //}
+
+                //Property Type 
+                if (searchModel.PropertyType.HasValue)
+                {
+                    result = result.Where(t => t.PropertyTypeId <= searchModel.PropertyType);
+                }
+
+                //Search on county (address issue)
+                //if (!string.IsNullOrEmpty(searchModel.County))
+                //{
+                //    result = result.Where(t => t.County == searchModel.County);
+                //}
+                // Number of Bedrooms
+                if (searchModel.NumberOfBedrooms.HasValue)
+                {
+                    result = result.Where(t => t.NumberOfBedrooms >= searchModel.NumberOfBedrooms);
+                }
+
 
                 //if (searchModel.MinManufacturerYear.HasValue)
                 //{
@@ -90,8 +110,8 @@ namespace HSH.Controllers
                 //}
 
             }
-            var vehicles = await result.ToListAsync();
-            var model = await vehicles.Convert(db);
+            var Propertys = await result.ToListAsync();
+            var model = await Propertys.Convert(db);
             //return View(model);
             return View(model.OrderBy(t => t.Price));
         }

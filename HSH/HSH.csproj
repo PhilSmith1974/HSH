@@ -337,7 +337,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PropertyItemRow.cs" />
-    <Compile Include="Areas\Admin\Models\PropertySearchModel.cs" />
+    <Compile Include="Models\PropertySearchModel.cs" />
     <Compile Include="Models\PropertySection.cs" />
     <Compile Include="Models\PropertySectionModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
@@ -355,7 +355,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carret.css" />
-    <Content Include="Content\Documents\PDF image.jpg" />
     <Content Include="Content\forgot-password.css" />
     <Content Include="Content\Images\document.jpg" />
     <Content Include="Content\Images\HollyBankAvenue.jpg" />
@@ -364,7 +363,7 @@
     <Content Include="Content\Images\laptop.jpg" />
     <Content Include="Content\Images\Mayden.jpg" />
     <Content Include="Content\Images\OliveLodge1.jpg" />
-    <Content Include="Content\Images\PDF image.jpg" />
+    <Content Include="Content\Images\PDF_image.jpg" />
     <Content Include="Content\Images\Video.png" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Logos\HSHLogo 30x152.png" />
@@ -467,9 +466,9 @@
     <Content Include="Areas\Admin\Views\FavouriteProperty\Details.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\FavouriteProperty\Index.cshtml" />
-    <Content Include="Content\Documents\Draft Deed.pdf" />
-    <Content Include="Content\Documents\Beltany Company.pdf" />
-    <Content Include="Content\Documents\BER Certificate.pdf" />
+    <Content Include="Content\Documents\DraftDeed.pdf" />
+    <Content Include="Content\Documents\BeltanyCompany.pdf" />
+    <Content Include="Content\Documents\BERCertificate.pdf" />
     <None Include="Properties\PublishProfiles\HSHproperty - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -542,6 +541,8 @@
     <Content Include="Views\Shared\_AddressPartialView.cshtml" />
     <Content Include="Views\Shared\_ForgotPasswordPanelPartial.cshtml" />
     <Content Include="Views\PropertyContent\Content.cshtml" />
+    <Content Include="Views\Home\SearchIndex.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

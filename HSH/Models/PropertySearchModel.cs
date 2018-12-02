@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
-using HSH.Models;
 using HSH.Entities;
+using HSH.Areas.Admin.Models;
 
-namespace HSH.Areas.Admin.Models
+namespace HSH.Models
 {
     public class PropertySearchModel
     {

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace HSH.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class PropertyContentController : Controller
     {
        
