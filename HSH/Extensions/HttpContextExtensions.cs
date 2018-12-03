@@ -10,7 +10,7 @@ namespace HSH.Extensions
     public static class HttpContextExtensions
     {
         private const string nameidentifier = 
-            "http://schemas/xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
 
         public static string GetUserId(this HttpContextBase ctx)
         {

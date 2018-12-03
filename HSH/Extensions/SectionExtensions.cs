@@ -35,7 +35,7 @@ namespace HSH.Extensions
 
             var result = sections.Distinct(new PropertySectionEqualityComparer()).ToList();
 
-            var union = result.Where(r => r.Title.ToLower().Contains("download"))
+            var union = result.Where(r => !r.Title.ToLower().Contains("download"))
                 .Union(result.Where(r => r.Title.ToLower().Contains("download")));
 
             var model = new PropertySectionModel
