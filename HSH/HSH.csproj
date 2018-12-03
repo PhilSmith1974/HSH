@@ -337,7 +337,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PropertyItemRow.cs" />
-    <Compile Include="Models\PropertySearchModel.cs" />
+    <Compile Include="Areas\Admin\Models\PropertySearchModel.cs" />
     <Compile Include="Models\PropertySection.cs" />
     <Compile Include="Models\PropertySectionModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
@@ -389,6 +389,7 @@
     <Content Include="Areas\Admin\Views\Section\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Section\Index.cshtml" />
     <Content Include="Scripts\carret.js" />
+    <Content Include="Scripts\FavButton.js" />
     <Content Include="Scripts\forgot-password.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\RegisterUser.js" />
@@ -543,6 +544,8 @@
     <Content Include="Views\PropertyContent\Content.cshtml" />
     <Content Include="Views\Home\SearchIndex.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_SearchButton.cshtml" />
+    <Content Include="Views\Shared\_BackToHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,7 +13,7 @@ using System.Transactions;
 
 namespace HSH.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Agent")]
     public class ItemController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

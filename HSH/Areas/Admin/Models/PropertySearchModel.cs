@@ -17,8 +17,11 @@ namespace HSH.Models
         [Display(Name = "Price")]
         public double? Price { get; set; }
 
-        [Display(Name = "Property Type")]      
+        [Display(Name = "Property Type")]
         public int? PropertyType { get; set; }
+
+        [DisplayName("Property Type")]
+        public ICollection<PropertyType> PropertyTypes { get; set; }
 
         [Display(Name = "No. Of Bedrooms")]
         public int? NumberOfBedrooms { get; set; }
@@ -27,6 +30,17 @@ namespace HSH.Models
 
         public AddressModel Address { get; set; }
 
+        //public string PropertyType
+        //{
+        //    get
+        //    {
+        //        return PropertyTypes == null ||
+        //            PropertyTypes.Count.Equals(0) ?
+        //            String.Empty : PropertyTypes.First(
+        //                pt => pt.Id.Equals(PropertyTypeId)).Title;
+        //    }
+        //}
+
         //[Display(Name = "Minimum Duration")]
         //[Range(1, Int32.MaxValue, ErrorMessage = "Please enter a number above 0.")]
         //public int? MinDuration { get; set; }  // int? here means that the integer is nullable which means that users don't have to fill in that field when searching
@@ -34,7 +48,5 @@ namespace HSH.Models
         //[Display(Name = "Maximum Duration")]
         //[Range(1, Int32.MaxValue, ErrorMessage = "Please enter a number above 0.")]
         //public int? MaxDuration { get; set; }
-
-
     }
 }

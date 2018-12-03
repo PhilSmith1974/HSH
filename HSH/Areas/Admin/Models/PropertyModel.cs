@@ -9,12 +9,10 @@ namespace HSH.Areas.Admin.Models
 {
     public class PropertyModel
     {
-
         public PropertyModel()
         {
             Address = new AddressModel();
         }
-
 
         public int Id { get; set; }
         [MaxLength(255)]
