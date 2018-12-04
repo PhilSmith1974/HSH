@@ -18,7 +18,7 @@ namespace HSH.Models
         public double? Price { get; set; }
 
         [Display(Name = "Property Type")]
-        public int? PropertyType { get; set; }
+        public int? PropertyTypeId { get; set; }
 
         [DisplayName("Property Type")]
         public ICollection<PropertyType> PropertyTypes { get; set; }
@@ -30,16 +30,16 @@ namespace HSH.Models
 
         public AddressModel Address { get; set; }
 
-        //public string PropertyType
-        //{
-        //    get
-        //    {
-        //        return PropertyTypes == null ||
-        //            PropertyTypes.Count.Equals(0) ?
-        //            String.Empty : PropertyTypes.First(
-        //                pt => pt.Id.Equals(PropertyTypeId)).Title;
-        //    }
-        //}
+        public string PropertyType
+        {
+            get
+            {
+                return PropertyTypes == null ||
+                    PropertyTypes.Count.Equals(0) ?
+                    String.Empty : PropertyTypes.First(
+                        pt => pt.Id.Equals(PropertyTypeId)).Title;
+            }
+        }
 
         //[Display(Name = "Minimum Duration")]
         //[Range(1, Int32.MaxValue, ErrorMessage = "Please enter a number above 0.")]

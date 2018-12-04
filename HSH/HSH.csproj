@@ -297,6 +297,7 @@
     <Compile Include="Areas\Admin\Models\AddressModel.cs" />
     <Compile Include="Areas\Admin\Models\EditButtonModel.cs" />
     <Compile Include="Areas\Admin\Models\FavouritePropertyModel.cs" />
+    <Compile Include="Areas\Admin\Models\IApplicationDbContext.cs" />
     <Compile Include="Areas\Admin\Models\PropertyItemModel.cs" />
     <Compile Include="Areas\Admin\Models\PropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\SmallButtonModel.cs" />

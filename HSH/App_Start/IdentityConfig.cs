@@ -91,13 +91,13 @@ namespace HSH
             // You can write your own provider and plug it in here.
             manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser>
             {
-                MessageFormat = "Your security code is {0}"
+                MessageFormat = "Your HSH security code is {0}"
             });
 
             manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser>
             {
                 Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
+                BodyFormat = "Your HSH security code is {0}"
             });
 
             //manager.RegisterTwoFactorProvider("Authy One Touch", new AuthyOneTouchProvider<ApplicationUser>("AuthyId"));

@@ -51,7 +51,24 @@ namespace HSH.Controllers
         }
 
 
-        private ApplicationDbContext db = new ApplicationDbContext();
+        //private ApplicationDbContext db = new ApplicationDbContext();
+        //needed the below code to reference te fake data for unit 
+        //test as opposed to referencing the actual database data
+        //***Modify
+        private readonly IApplicationDbContext db = new ApplicationDbContext();
+
+        //added for unit testing
+        public HomeController() { }
+
+        //added for unit testing
+        public HomeController(IApplicationDbContext context)
+        {
+            db = context;
+        }
+
+
+
+
         // Search Property
 
         public ActionResult Search()
@@ -59,61 +76,61 @@ namespace HSH.Controllers
             return View();
         }
 
-        [AllowAnonymous]
-        public async Task<ActionResult> SearchIndex(PropertySearchModel searchModel)
-        {
-            var result = db.Propertys.AsQueryable();
-            if (searchModel != null)
-            {
-                //Keyword
-                if (!string.IsNullOrEmpty(searchModel.TitleKeyword))
-                {
-                    result = result.Where(t => t.Title.Contains(searchModel.TitleKeyword));
-                }
+        //[AllowAnonymous]
+        //public async Task<ActionResult> SearchIndex(PropertySearchModel searchModel)
+        //{
+        //    var result = db.Propertys.AsQueryable();
+        //        //.AsQueryable();
+        //    if (searchModel != null)
+        //    {
+        //        //Keyword
+        //        if (!string.IsNullOrEmpty(searchModel.TitleKeyword))
+        //        {
+        //            result = result.Where(t => t.Title.Contains(searchModel.TitleKeyword));
+        //        }
 
-                //Price 
-                if (searchModel.Price.HasValue)
-                {
-                    result = result.Where(t => t.Price <= searchModel.Price);
-                }
-                //Property Type (Int to String.....)
-                //if (!string.IsNullOrEmpty(searchModel.PropertyType))
-                //{
-                //    result = result.Where(t => t.PropertyType.Model.Equals(searchModel.PropertyType));
-                //}
+        //        //Price 
+        //        if (searchModel.Price.HasValue)
+        //        {
+        //            result = result.Where(t => t.Price <= searchModel.Price);
+        //        }
+        //        //Property Type (Int to String.....)
+        //        //if (!string.IsNullOrEmpty(searchModel.PropertyType))
+        //        //{
+        //        //    result = result.Where(t => t.PropertyType.Model.Equals(searchModel.PropertyType));
+        //        //}
 
-                //Property Type 
-                if (searchModel.PropertyType.HasValue)
-                {
-                    result = result.Where(t => t.PropertyTypeId <= searchModel.PropertyType);
-                }
+        //        //Property Type 
+        //        if (searchModel.PropertyTypeId.HasValue)
+        //        {
+        //            result = result.Where(t => t.PropertyTypeId <= searchModel.PropertyTypeId);
+        //        }
 
-                //Search on county (address issue)
-                //if (!string.IsNullOrEmpty(searchModel.County))
-                //{
-                //    result = result.Where(t => t.County == searchModel.County);
-                //}
-                // Number of Bedrooms
-                if (searchModel.NumberOfBedrooms.HasValue)
-                {
-                    result = result.Where(t => t.NumberOfBedrooms >= searchModel.NumberOfBedrooms);
-                }
+        //        //Search on county (address issue)
+        //        //if (!string.IsNullOrEmpty(searchModel.County))
+        //        //{
+        //        //    result = result.Where(t => t.County == searchModel.County);
+        //        //}
+        //        // Number of Bedrooms
+        //        if (searchModel.NumberOfBedrooms.HasValue)
+        //        {
+        //            result = result.Where(t => t.NumberOfBedrooms >= searchModel.NumberOfBedrooms);
+        //        }
 
-
-                //if (searchModel.MinManufacturerYear.HasValue)
-                //{
-                //    result = result.Where(t => t.ManufacturerYear >= searchModel.MinManufacturerYear);
-                //}
-                //if (searchModel.MaxManufacturerYear.HasValue)
-                //{
-                //    result = result.Where(t => t.ManufacturerYear <= searchModel.MaxManufacturerYear);
-                //}
+        //        return View("SearchIndex", result.OrderByDescending(p => p.Price));
+        //        //if (searchModel.MinManufacturerYear.HasValue)
+        //        //{
+        //        //    result = result.Where(t => t.ManufacturerYear >= searchModel.MinManufacturerYear);
+        //        //}
+        //        //if (searchModel.MaxManufacturerYear.HasValue)
+        //        //{
+        //        //    result = result.Where(t => t.ManufacturerYear <= searchModel.MaxManufacturerYear);
+        //        //}
 
             }
-            var Propertys = await result.ToListAsync();
-            var model = await Propertys.Convert(db);
-            //return View(model);
-            return View(model.OrderBy(t => t.Price));
-        }
+            //var Propertys = await result.ToListAsync();
+            //var model = await Propertys.Convert(db);
+            ////return View(model);
+            //return View(model.OrderBy(t => t.Price));
     }
-}
+

@@ -29,7 +29,6 @@ namespace HSH
             bundles.Add(new ScriptBundle("~/bundles/ui").Include(
                       "~/Scripts/carret.js",
                       "~/Scripts/JWPlayer.js",
-                      "~/Scripts/code.js",
                       "~/Scripts/RegisterUser.js",
                       "~/Scripts/login.js",
                       "~/Scripts/forgot-password.js"

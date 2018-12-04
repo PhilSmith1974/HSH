@@ -2,7 +2,9 @@
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using HSH.Areas.Admin.Models;
 using HSH.Entities;
+//using HSH.Tests.TestContext;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -32,7 +34,7 @@ namespace HSH.Models
         //}
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -43,6 +45,12 @@ namespace HSH.Models
         {
             return new ApplicationDbContext();
         }
+
+        public void MarkAsModified(object item)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Section> Sections { get; set; }
         public DbSet<Part> Parts { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }
