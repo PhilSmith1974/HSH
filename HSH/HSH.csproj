@@ -294,7 +294,6 @@
     <Compile Include="Areas\Admin\Controllers\SectionController.cs" />
     <Compile Include="Areas\Admin\Extensions\ConversionExtensions.cs" />
     <Compile Include="Areas\Admin\Models\Addresses.cs" />
-    <Compile Include="Areas\Admin\Models\AddressModel.cs" />
     <Compile Include="Areas\Admin\Models\EditButtonModel.cs" />
     <Compile Include="Areas\Admin\Models\FavouritePropertyModel.cs" />
     <Compile Include="Areas\Admin\Models\IApplicationDbContext.cs" />
@@ -332,6 +331,10 @@
     <Compile Include="Extensions\ThumbnailExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812072039346_hsh.cs" />
+    <Compile Include="Migrations\201812072039346_hsh.Designer.cs">
+      <DependentUpon>201812072039346_hsh.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -373,6 +376,7 @@
     <Content Include="Content\navbar.css" />
     <Content Include="Content\propertyContent.css" />
     <Content Include="Content\RegisterUser.css" />
+    <Content Include="Content\ThumbnailAreaPartial.css" />
     <Content Include="Content\thumbnails.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -563,6 +567,11 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812072039346_hsh.resx">
+      <DependentUpon>201812072039346_hsh.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

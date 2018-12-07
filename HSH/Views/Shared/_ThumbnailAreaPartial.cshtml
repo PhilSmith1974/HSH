@@ -1,4 +1,50 @@
 ﻿@model HSH.Models.ThumbnailAreaModel
+<style>
+    /* The overlay effect (full height and width) - lays on top of the container and over the image */
+    .overlay {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        transition: .3s ease;
+        background-color: black;
+    }
+
+        /* When you mouse over the container, fade in the overlay icon*/
+        .overlay:hover {
+            opacity: 0.7;
+        }
+
+    /* The icon inside the overlay is positioned in the middle vertically and horizontally */
+    .icon {
+        color: white;
+        font-size: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .favourite-heart {
+        font-size: 8rem;
+        color: red;
+    }
+
+    .heart {
+        font-size: 8rem;
+        color: white;
+    }
+</style>
+
+
+
 
 <div class="row">
     @if (!Model.Title.Equals(string.Empty))
