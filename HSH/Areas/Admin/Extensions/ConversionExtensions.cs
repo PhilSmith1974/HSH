@@ -1,43 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web;
-using HSH.Areas.Admin.Models;
-using System.Collections;
-using HSH.Models;
+﻿using HSH.Areas.Admin.Models;
 using HSH.Entities;
+using HSH.Models;
+using Microsoft.AspNet.Identity;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
+using System.Web;
+using System.Web.Mvc;
 
 namespace HSH.Areas.Admin.Extensions
 {
     #region Property
     public static class ConversionExtensions
     {
-        public static async Task<IEnumerable<PropertyModel>> Convert(
-            this IEnumerable<Property> propertys, ApplicationDbContext db)
+
+        public static async Task<IEnumerable<T>> Convert<T>(
+    this IEnumerable<Property> propertys, ApplicationDbContext db) where T : PropertyModel
         {
             if (propertys.Count().Equals(0))
-                return new List<PropertyModel>();
+            {
+                return new List<T>();
+            }
 
             var texts = await db.PropertyLinkTexts.ToListAsync();
             var types = await db.PropertyTypes.ToListAsync();
 
-            return from p in propertys
-                   select new PropertyModel
-                   {
-                       Id = p.Id,
-                       Title = p.Title,
-                       Description = p.Description,
-                       Price = p.Price,
-                       ImageUrl = p.ImageUrl,
-                       PropertyLinkTextId = p.PropertyLinkTextId,
-                       PropertyTypeId = p.PropertyTypeId,
-                       PropertyLinkTexts = texts,
-                       PropertyTypes = types
-                   };
+            string userId = HttpContext.Current.User.Identity.GetUserId();
 
+            return (IEnumerable<T>)from p in propertys
+                                   select new PropertyModel
+                                   {
+                                       Id = p.Id,
+                                       Title = p.Title,
+                                       Description = p.Description,
+                                       Price = p.Price,
+                                       ImageUrl = p.ImageUrl,
+                                       PropertyLinkTextId = p.PropertyLinkTextId,
+                                       PropertyTypeId = p.PropertyTypeId,
+                                       PropertyLinkTexts = texts,
+                                       PropertyTypes = types,
+                                       IsFavourite = db.UserPropertyFavourites.Any(d => d.PropertyId == p.Id && d.UserId == userId)
+                                   };
         }
 
         public static async Task<PropertyModel> Convert(
@@ -48,6 +55,7 @@ namespace HSH.Areas.Admin.Extensions
             var type = await db.PropertyTypes.FirstOrDefaultAsync(
                 p => p.Id.Equals(property.PropertyTypeId));
 
+            string userId = HttpContext.Current.User.Identity.GetUserId();
 
             var model = new PropertyModel
             {
@@ -59,7 +67,8 @@ namespace HSH.Areas.Admin.Extensions
                 PropertyLinkTextId = property.PropertyLinkTextId,
                 PropertyTypeId = property.PropertyTypeId,
                 PropertyLinkTexts = new List<PropertyLinkText>(),
-                PropertyTypes = new List<PropertyType>()
+                PropertyTypes = new List<PropertyType>(),
+                IsFavourite = db.UserPropertyFavourites.Any(d => d.PropertyId == property.Id && d.UserId == userId)
             };
 
             model.PropertyLinkTexts.Add(text);
@@ -68,14 +77,28 @@ namespace HSH.Areas.Admin.Extensions
             return model;
 
         }
+
+
+        public static async Task<IEnumerable<SelectListItem>> Convert(
+           this IEnumerable<PropertyType> properties, ApplicationDbContext db)
+        {
+            return from type in properties
+                   select new SelectListItem
+                   {
+                       Text = type.Title,
+                       Value = type.Id.ToString()
+                   };
+        }
         #endregion
 
-    #region Property Item
+        #region Property Item
         public static async Task<IEnumerable<PropertyItemModel>> Convert(
            this IQueryable<PropertyItem> propertyItems, ApplicationDbContext db)
         {
             if (propertyItems.Count().Equals(0))
+            {
                 return new List<PropertyItemModel>();
+            }
 
             return await (from pi in propertyItems
                           select new PropertyItemModel
@@ -157,14 +180,16 @@ namespace HSH.Areas.Admin.Extensions
                 }
             }
         }
-    #endregion
+        #endregion
 
-    #region Favourite Property
+        #region Favourite Property
         public static async Task<IEnumerable<FavouritePropertyModel>> Convert(
           this IQueryable<FavouriteProperty> favouritePropertys, ApplicationDbContext db)
         {
             if (favouritePropertys.Count().Equals(0))
+            {
                 return new List<FavouritePropertyModel>();
+            }
 
             return await (from pi in favouritePropertys
                           select new FavouritePropertyModel
@@ -180,8 +205,8 @@ namespace HSH.Areas.Admin.Extensions
         }
 
         public static async Task<FavouritePropertyModel> Convert(
-           this FavouriteProperty favouriteProperty, 
-           ApplicationDbContext db,bool addListData = true)
+           this FavouriteProperty favouriteProperty,
+           ApplicationDbContext db, bool addListData = true)
         {
             var model = new FavouritePropertyModel
             {
@@ -254,4 +279,3 @@ namespace HSH.Areas.Admin.Extensions
 
     }
 }
-    

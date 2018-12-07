@@ -1,27 +1,97 @@
-﻿using System;
+﻿using HSH.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 using System.Xml.Serialization;
 
 namespace HSH.Areas.Admin.Models
 {
-    // address class
     [Serializable]
-    public class AddressModel
+    [XmlRoot("Address")]
+    public class PropertyModel
     {
-        public long Id { get; set; }
+        [XmlIgnore]
+        public int Id { get; set; }
+
+        [XmlIgnore]
+        [MaxLength(255)]
+        [Required]
+        public string Title { get; set; }
+
+        [XmlIgnore]
+        [MaxLength(2048)]
+        [Required]
+        public string Description { get; set; }
+
+        [XmlIgnore]
+        [Required]
+        public int NumberOfBedrooms { get; set; }
+
+        [XmlIgnore]
+        [Required]
+        [DisplayName("Price € ")]
+        public double Price { get; set; }
+
+        //[Required]
+        //[DisplayName("Address")]
+        //public AddressModel Address { get; set; }
+
+        [XmlIgnore]
+        [MaxLength(1024)]
+        [DisplayName("Image Url")]
+        public string ImageUrl { get; set; }
+
+        [XmlIgnore]
+        [DisplayName("Property Link Text")]
+        public int PropertyLinkTextId { get; set; }
+
+        [XmlIgnore]
+        [DisplayName("Property Type")]
+        public int PropertyTypeId { get; set; }
+
+        [XmlIgnore]
+        [DisplayName("Property Link Text")]
+        public ICollection<PropertyLinkText> PropertyLinkTexts { get; set; }
+
+        [XmlIgnore]
+        [DisplayName("Property Type")]
+        public ICollection<PropertyType> PropertyTypes { get; set; }
+
+        [XmlIgnore]
+        public string PropertyType
+        {
+            get
+            {
+                return PropertyTypes == null ||
+                    PropertyTypes.Count.Equals(0) ?
+                    String.Empty : PropertyTypes.First(
+                        pt => pt.Id.Equals(PropertyTypeId)).Title;
+            }
+        }
+
+        [XmlIgnore]
+        public string PropertyLinkText
+        {
+            get
+            {
+                return PropertyLinkTexts == null ||
+                    PropertyLinkTexts.Count.Equals(0) ?
+                    String.Empty : PropertyLinkTexts.First(
+                        pt => pt.Id.Equals(PropertyLinkTextId)).Title;
+            }
+        }
+
+        [XmlIgnore]
+        public bool IsFavourite { get; set; }
+
+        public long AddressId { get; set; }
         [DisplayName("Summary Line")]
         [XmlElement("summaryline")]
         public string SummaryLine { get; set; }
-        [XmlElement("organisation")]
-        public string Organisation { get; set; }
-        [XmlElement("summapremiseryline")]
+        [XmlElement("premise")]
         public string Premise { get; set; }
-        [DisplayName("Dependent Street")]
-        [XmlElement("dependentstreet")]
-        public string DependentStreet { get; set; }
         [XmlElement("street")]
         public string Street { get; set; }
         [DisplayName("Dependent Locality")]
@@ -38,8 +108,7 @@ namespace HSH.Areas.Admin.Models
         [DisplayName("Post Code")]
         [XmlElement("postcode")]
         public string PostCode { get; set; }
+        [XmlElement("number")]
         public string Number { get; set; }
-
-        public override string ToString() { return SummaryLine; }
     }
 }

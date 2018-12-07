@@ -16,6 +16,18 @@
                     <div class="thumbnail-container">
                         <div class="thumbnail-img-container">
                             <img class="thumbnail-img" src="@thumb.ImageUrl" alt="Property Photo" />
+                            <div class="overlay">
+
+                                @{
+                                    string heartClass = thumb.IsFavourite ? "favourite-heart" : "heart";
+                                    string action = thumb.IsFavourite ? "RemoveFromFavourites" : "AddToFavourites";
+                                    string title = thumb.IsFavourite ? "Remove from favourites" : "Add to favourites";
+                                }
+
+                                <a href="~/Home/@action?propertyId=@thumb.PropertyId" class="icon" title="@title">
+                                    <span class="glyphicon glyphicon-heart @heartClass"></span>
+                                </a>
+                            </div>
                         </div>
                         <a class="tag text-tag hover-effect" href="@thumb.Link">
                             @thumb.TagText

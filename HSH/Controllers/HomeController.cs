@@ -76,9 +76,9 @@ namespace HSH.Controllers
                              ((prop.NumberOfBedrooms >= (searchModel.NumberOfBedroomsFrom ?? int.MinValue)) && (prop.NumberOfBedrooms <= (searchModel.NumberOfBedroomsTo ?? int.MaxValue))) &&
                              (prop.PropertyTypeId == (searchModel.PropertyTypeId ?? prop.PropertyTypeId))
                              select prop;
-                // changed convert to convertall
+
                 var properties = await result.ToListAsync();
-                var model = await properties.ConvertAll<PropertyModel>(db);
+                var model = await properties.Convert<PropertyModel>(db);
                 return View(model.OrderBy(t => t.Price));
             }
 

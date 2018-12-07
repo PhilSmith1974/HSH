@@ -13,11 +13,9 @@ namespace HSH.Entities
     public class Address
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string SummaryLine { get; set; }
-        public string Organisation { get; set; }
         public string Premise { get; set; }
-        public string DependentStreet { get; set; }
         public string Street { get; set; }
         public string DependentLocality { get; set; }
         public string DoubleDependentLocality { get; set; }

@@ -27,32 +27,40 @@
         <th>
             @Html.DisplayNameFor(model => model.PropertyTypes)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFavourite)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PropertyLinkText)
-            (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PropertyType)
-            (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyLinkText)
+                (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PropertyType)
+                (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
+            </td>
+            <td>
+                @{ string favouriteGlyphicon = item.IsFavourite ? "glyphicon glyphicon-heart" : "";}
+                <span class="@favouriteGlyphicon"></span>
+            </td>
 
-        @Html.Partial("_TableButtonsPartial",
-         new SmallButtonModel { Id = item.Id })       
-    </tr>
-}
+            @Html.Partial("_TableButtonsPartial",
+             new SmallButtonModel { Id = item.Id })
+        </tr>
+    }
 
 </table>

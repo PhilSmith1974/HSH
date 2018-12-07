@@ -23,9 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.PropertyTypes)
         </th>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.IsFavourite)
-        </th>*@
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -48,10 +48,10 @@
                 @Html.DisplayFor(modelItem => item.PropertyType)
                 (@{@Html.DisplayFor(modelItem => item.PropertyTypeId)})
             </td>
-            @*<td>
+            <td>
                 @{ string favouriteGlyphicon = item.IsFavourite ? "glyphicon glyphicon-heart" : "";}
                 <span class="@favouriteGlyphicon"></span>
-            </td>*@
+            </td>
         </tr>
     }
 </table>

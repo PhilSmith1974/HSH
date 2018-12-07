@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<HSH.Models.ThumbnailAreaModel>
-    
+
 @using HSH.Models
 @using HSH.Areas.Admin.Models
 @{
     ViewBag.Title = "";
 }
-
 
 <div class="row">
     @if (User.Identity.IsAuthenticated)
@@ -30,8 +29,6 @@
         </div>
 
     }
-
-
 </div>
 
 

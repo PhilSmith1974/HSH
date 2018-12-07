@@ -13,6 +13,6 @@ namespace HSH.Areas.Admin.Models
     {
 
         [XmlElement("Address")]
-        public List<AddressModel> Address { get; set; }
+        public List<PropertyModel> AddressList { get; set; }
     }
 }

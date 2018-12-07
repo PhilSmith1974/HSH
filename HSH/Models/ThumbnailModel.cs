@@ -16,5 +16,6 @@ namespace HSH.Models
         public string ImageUrl { get; set; }
         public string Link { get; set; }
         public string ContentTag { get; set; }
+        public bool IsFavourite { get; set; }
     }
 }

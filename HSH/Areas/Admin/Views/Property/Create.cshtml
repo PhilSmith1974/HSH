@@ -3,6 +3,8 @@
 @using HSH.Extensions
 @using HSH.Areas.Admin.Models
 @{
+    /**/
+
     ViewBag.Title = "Create";
 }
 
@@ -12,102 +14,102 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Property</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Property</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberOfBedrooms, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumberOfBedrooms, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*Dropdown List*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.PropertyTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                            model => model.PropertyTypeId,
+                            Model.PropertyTypes.ToSelectListItem(Model.PropertyTypeId),
+                            new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PropertyLinkTexts, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+        model => model.PropertyLinkTextId,
+        Model.PropertyLinkTexts.ToSelectListItem(Model.PropertyLinkTextId),
+        new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PropertyLinkTextId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <h4>Address</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control", id = "postalCode" } })
+                @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-pull-1">
+                <button type="button" id="autoCompleteAddress" class="btn btn-primary">Auto Complete</button>
+            </div>
+        </div>
+
+        @*Partial View Containing the Address fields (it is updated with the auto complete)*@
+        <div id="addressPartialView">
+            @Html.Partial("_AddressPartialView", Model)
+        </div>
+
+        <h4>Additional Info</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.NumberOfBedrooms, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.NumberOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.NumberOfBedrooms, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    @*Dropdown List*@
-    <div class="form-group">
-        @Html.LabelFor(model => model.PropertyTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(
-    model => model.PropertyTypeId,
-    Model.PropertyTypes.ToSelectListItem(Model.PropertyTypeId),
-    new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.PropertyTypeId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PropertyLinkTexts, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(
-    model => model.PropertyLinkTextId,
-    Model.PropertyLinkTexts.ToSelectListItem(Model.PropertyLinkTextId),
-    new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.PropertyLinkTextId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <h4>Address</h4>
-    <hr />
-    <div class="form-group">
-        @Html.LabelFor(model => model.Address.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-2">
-            @Html.EditorFor(model => model.Address.PostCode, new { htmlAttributes = new { @class = "form-control", id = "postalCode" } })
-            @Html.ValidationMessageFor(model => model.Address.PostCode, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-md-pull-1">
-            <button type="button" id="autoCompleteAddress" class="btn btn-primary">Auto Complete</button>
-        </div>
-    </div>
-
-    @*Partial View Containing the Address fields (it is updated with the auto complete)*@
-    <div id="addressPartialView">
-        @Html.Partial("_AddressPartialView", Model.Address)
-    </div>
-
-    <h4>Additional Info</h4>
-    <hr />
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" />
-        </div>
-    </div>
-</div>
 }
 
 @**AUTO COMPLETE FEATURE*@

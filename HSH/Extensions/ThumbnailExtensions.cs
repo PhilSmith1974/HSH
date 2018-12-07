@@ -41,22 +41,20 @@ namespace HSH.Extensions
                 var favouriteIds = await GetFavouriteIdsAsync(userId, db);
 
                 thumbnails = await (
-                    from pf in db.FavouritePropertys
-                    join p in db.Propertys on pf.PropertyId equals p.Id
+                    from p in db.Propertys
                     join plt in db.PropertyLinkTexts on p.PropertyLinkTextId equals plt.Id
                     join pt in db.PropertyTypes on p.PropertyTypeId equals pt.Id
-                    where favouriteIds.Contains(pf.FavouriteId)
                     select new ThumbnailModel
                     {
                         PropertyId = p.Id,
-                        FavouriteId = pf.FavouriteId,
                         Title = p.Title,
                         Description = p.Description,
                         ImageUrl = p.ImageUrl,
                         Price = p.Price,
                         Link = "/PropertyContent/Index/" + p.Id,
                         TagText = plt.Title,
-                        ContentTag = pt.Title
+                        ContentTag = pt.Title,
+                        IsFavourite = db.UserPropertyFavourites.Any(upf => upf.PropertyId == p.Id && upf.UserId == userId)
                     }).ToListAsync();
             }
             catch { }

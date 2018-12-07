@@ -1,17 +1,17 @@
-﻿using System;
+﻿using HSH.Areas.Admin.Extensions;
+using HSH.Areas.Admin.Models;
+using HSH.Entities;
+using HSH.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
-using HSH.Entities;
-using HSH.Models;
-using HSH.Areas.Admin.Extensions;
-using HSH.Areas.Admin.Models;
-using System.Transactions;
 //using System.Transactions;
 
 namespace HSH.Areas.Admin.Controllers
@@ -25,7 +25,7 @@ namespace HSH.Areas.Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var propertys = await db.Propertys.ToListAsync();
-            var model = await propertys.Convert(db);
+            var model = await propertys.Convert<PropertyModel>(db);
             return View(model);
         }
 
@@ -46,7 +46,7 @@ namespace HSH.Areas.Admin.Controllers
         }
 
         // GET: Admin/Property/Create
-        public async Task <ActionResult> Create()
+        public async Task<ActionResult> Create()
         {
             var model = new PropertyModel
             {
@@ -62,17 +62,37 @@ namespace HSH.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Description,Price,ImageUrl,PropertyLinkTextId,PropertyTypeID")] Property property)
+        public async Task<ActionResult> Create(PropertyModel model)
         {
             // Possible error
             if (ModelState.IsValid)
             {
-                db.Propertys.Add(property);
+                Property prop = new Property();
+                prop.Address = new Address();
+                prop.Description = model.Description;
+                prop.ImageUrl = model.ImageUrl;
+                prop.NumberOfBedrooms = model.NumberOfBedrooms;
+                prop.Price = model.Price;
+                prop.PropertyLinkTextId = model.PropertyLinkTextId;
+                prop.PropertyTypeId = model.PropertyTypeId;
+                prop.Title = model.Title;
+
+                prop.Address.County = model.County;
+                prop.Address.DependentLocality = model.DependentLocality;
+                prop.Address.DoubleDependentLocality = model.DoubleDependentLocality;
+                prop.Address.Number = model.Number;
+                prop.Address.PostCode = model.PostCode;
+                prop.Address.PostTown = model.PostTown;
+                prop.Address.Premise = model.Premise;
+                prop.Address.Street = model.Street;
+                prop.Address.SummaryLine = model.SummaryLine;
+
+                db.Propertys.Add(prop);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(property);
+            return View(model);
         }
 
         // GET: Admin/Property/Edit/5
@@ -89,7 +109,7 @@ namespace HSH.Areas.Admin.Controllers
             }
             var prop = new List<Property>();
             prop.Add(property);
-            var PropertyModel = await prop.Convert(db);
+            var PropertyModel = await prop.Convert<PropertyModel>(db);
             return View(PropertyModel.First());
         }
 
@@ -123,7 +143,7 @@ namespace HSH.Areas.Admin.Controllers
             }
             var model = await property.Convert(db);
             return View(model);
-            
+
         }
 
         // POST: Admin/Property/Delete/5
@@ -169,7 +189,7 @@ namespace HSH.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-       
-        }
+
     }
+}
 

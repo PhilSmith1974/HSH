@@ -24,7 +24,7 @@ namespace HSH.Areas.Admin.Controllers
             // search string - MUST be supplied, if blank defaults to NR147PZ
             string searchTerm = postalCode.Replace(" ", ""); //remove spaces
 
-            AddressModel address = new AddressModel(); // in case of null response or error, returns a blank AddressModel
+            PropertyModel address = new PropertyModel(); // in case of null response or error, returns a blank AddressModel
 
             try
             {
@@ -50,10 +50,9 @@ namespace HSH.Areas.Admin.Controllers
 
                     // grab the response
                     var addresses = (Addresses)((new XmlSerializer(typeof(Addresses))).Deserialize(response.GetResponseStream()));
-
-                    if (addresses.Address.Any())
+                    if (addresses.AddressList.Any())
                     {
-                        address = addresses.Address.FirstOrDefault();
+                        address = addresses.AddressList.FirstOrDefault();
                     }
 
                     response.Close();
