@@ -23,6 +23,8 @@ namespace HSH.Tests.TestContext
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<PropertyLinkText> PropertyLinkTexts { get; set; }
 
+        public object UserPropertyFavourites => throw new NotImplementedException();
+
         public Task<int> SaveChangesAsync()
         {
            throw new NotImplementedException();
