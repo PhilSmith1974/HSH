@@ -23,19 +23,19 @@ namespace HSH.Tests.TestContext
         public DbSet<PropertyType> PropertyTypes { get; set; }
         public DbSet<PropertyLinkText> PropertyLinkTexts { get; set; }
 
-        public void Dispose()
+        public Task<int> SaveChangesAsync()
         {
-
+           throw new NotImplementedException();
+            
         }
 
         public void MarkAsModified(object item)
         {
-          
+            throw new NotImplementedException();
         }
 
-        //public Task<int> SaveChangesAsync()
-        //{
-        //    //return 0;
-        //}
+        public void MarkAsModified(Property item) { }
+        public void Dispose(){ }
+     
     }
 }

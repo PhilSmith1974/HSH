@@ -17,18 +17,23 @@ namespace HSH.Tests.Controllers
     [TestClass()]
     public class HomeControllerTest
     {
-        //[TestMethod()]
-        //public void IndexTest()
-        //{
-        //    // Arrange
-        //    HomeController controller = new HomeController();
+        [TestMethod()]
+        public async Task <ActionResult> Index()
+        {
+            // Arrange
+            HomeController controller = new HomeController();
 
-        //    // Act
-        //    ViewResult result = controller.Index() as ViewResult;
+            // Act
+            ViewResult result = controller.Index() as ViewResult;
 
-        //    // Assert
-        //    Assert.IsNotNull(result);
-        //}
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+
+
+
+
 
         [TestMethod]
         public void About()
@@ -68,7 +73,7 @@ namespace HSH.Tests.Controllers
         }
 
         [TestMethod()]
-        public async Task SearchIndexTest1Async()
+        public async Task SearchIndexTest2Async()
         {
             //Arrange
             //creating the fake database with propertys, tdb = test database
@@ -167,5 +172,7 @@ namespace HSH.Tests.Controllers
         {
 
         }
+
     }
 }
+

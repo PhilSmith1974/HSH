@@ -321,6 +321,7 @@
     <Compile Include="Entities\Part.cs" />
     <Compile Include="Entities\Section.cs" />
     <Compile Include="Entities\UserFavourite.cs" />
+    <Compile Include="Entities\UserPropertyFavourite.cs" />
     <Compile Include="Extensions\EmalExtensions.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />

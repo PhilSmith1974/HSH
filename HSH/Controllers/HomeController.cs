@@ -1,21 +1,23 @@
-﻿using HSH.Models;
-using HSH.Areas.Admin.Extensions;
+﻿using HSH.Areas.Admin.Extensions;
 using HSH.Areas.Admin.Models;
-using System.Data.Entity;
+using HSH.Entities;
+using HSH.Extensions;
+using HSH.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using System.Threading.Tasks;
-using HSH.Extensions;
 
 
 namespace HSH.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public async Task<ActionResult> Index()
         {
@@ -33,7 +35,7 @@ namespace HSH.Controllers
                 });
             }
 
-            return View(model);
+            return View("Index", model);
         }
 
         public ActionResult About()
@@ -50,87 +52,96 @@ namespace HSH.Controllers
             return View();
         }
 
-
-        //private ApplicationDbContext db = new ApplicationDbContext();
-        //needed the below code to reference te fake data for unit 
-        //test as opposed to referencing the actual database data
-        //***Modify
-        private readonly IApplicationDbContext db = new ApplicationDbContext();
-
-        //added for unit testing
-        public HomeController() { }
-
-        //added for unit testing
-        public HomeController(IApplicationDbContext context)
+        [AllowAnonymous]
+        public async Task<ActionResult> Search()
         {
-            db = context;
+            var model = new PropertySearchModel();
+
+            model.PropertyTypesList = (await db.PropertyTypes.Convert(db)).ToList();
+            model.PropertyTypesList.Add(new SelectListItem() { Text = "", Value = null, Selected = true });
+
+            return View(model);
         }
 
-
-
-
-        // Search Property
-
-        public ActionResult Search()
+        [AllowAnonymous]
+        public async Task<ActionResult> SearchIndex(PropertySearchModel searchModel)
         {
+            if (searchModel != null)
+            {
+                var result = from prop in db.Propertys
+                             where
+                             ((prop.Title.Contains(searchModel.SearchTerm) || prop.Description.Contains(searchModel.SearchTerm)) || string.IsNullOrEmpty(searchModel.SearchTerm)) &&
+                             (prop.Address.County.Contains(searchModel.County) || string.IsNullOrEmpty(searchModel.County)) &&
+                             (prop.Price >= (searchModel.PriceFrom ?? double.MinValue) && prop.Price <= (searchModel.PriceTo ?? double.MaxValue)) &&
+                             ((prop.NumberOfBedrooms >= (searchModel.NumberOfBedroomsFrom ?? int.MinValue)) && (prop.NumberOfBedrooms <= (searchModel.NumberOfBedroomsTo ?? int.MaxValue))) &&
+                             (prop.PropertyTypeId == (searchModel.PropertyTypeId ?? prop.PropertyTypeId))
+                             select prop;
+                // changed convert to convertall
+                var properties = await result.ToListAsync();
+                var model = await properties.ConvertAll<PropertyModel>(db);
+                return View(model.OrderBy(t => t.Price));
+            }
+
             return View();
         }
 
-        //[AllowAnonymous]
-        //public async Task<ActionResult> SearchIndex(PropertySearchModel searchModel)
-        //{
-        //    var result = db.Propertys.AsQueryable();
-        //        //.AsQueryable();
-        //    if (searchModel != null)
-        //    {
-        //        //Keyword
-        //        if (!string.IsNullOrEmpty(searchModel.TitleKeyword))
-        //        {
-        //            result = result.Where(t => t.Title.Contains(searchModel.TitleKeyword));
-        //        }
-
-        //        //Price 
-        //        if (searchModel.Price.HasValue)
-        //        {
-        //            result = result.Where(t => t.Price <= searchModel.Price);
-        //        }
-        //        //Property Type (Int to String.....)
-        //        //if (!string.IsNullOrEmpty(searchModel.PropertyType))
-        //        //{
-        //        //    result = result.Where(t => t.PropertyType.Model.Equals(searchModel.PropertyType));
-        //        //}
-
-        //        //Property Type 
-        //        if (searchModel.PropertyTypeId.HasValue)
-        //        {
-        //            result = result.Where(t => t.PropertyTypeId <= searchModel.PropertyTypeId);
-        //        }
-
-        //        //Search on county (address issue)
-        //        //if (!string.IsNullOrEmpty(searchModel.County))
-        //        //{
-        //        //    result = result.Where(t => t.County == searchModel.County);
-        //        //}
-        //        // Number of Bedrooms
-        //        if (searchModel.NumberOfBedrooms.HasValue)
-        //        {
-        //            result = result.Where(t => t.NumberOfBedrooms >= searchModel.NumberOfBedrooms);
-        //        }
-
-        //        return View("SearchIndex", result.OrderByDescending(p => p.Price));
-        //        //if (searchModel.MinManufacturerYear.HasValue)
-        //        //{
-        //        //    result = result.Where(t => t.ManufacturerYear >= searchModel.MinManufacturerYear);
-        //        //}
-        //        //if (searchModel.MaxManufacturerYear.HasValue)
-        //        //{
-        //        //    result = result.Where(t => t.ManufacturerYear <= searchModel.MaxManufacturerYear);
-        //        //}
-
+        public async Task<ActionResult> AddToFavourites(int propertyId)
+        {
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
             }
-            //var Propertys = await result.ToListAsync();
-            //var model = await Propertys.Convert(db);
-            ////return View(model);
-            //return View(model.OrderBy(t => t.Price));
-    }
 
+            var property = db.Propertys.FirstOrDefault(d => d.Id == propertyId);
+
+            if (property == null)
+            {
+                throw new ApplicationException("Property Not Found");
+            }
+
+            string userId = HttpContext.GetUserId();
+
+            try
+            {
+                db.UserPropertyFavourites.Add(new UserPropertyFavourite() { PropertyId = propertyId, UserId = userId });
+                db.SaveChanges();
+            }
+            catch (Exception) { }
+
+            return RedirectToAction("Index", "Home");
+            ;
+        }
+
+
+        public async Task<ActionResult> RemoveFromFavourites(int propertyId)
+        {
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var property = db.Propertys.FirstOrDefault(d => d.Id == propertyId);
+
+            if (property == null)
+            {
+                throw new ApplicationException("Property Not Found");
+            }
+
+            string userId = HttpContext.GetUserId();
+
+            var favourite = db.UserPropertyFavourites.FirstOrDefault(f => f.PropertyId == propertyId && f.UserId == userId);
+
+            try
+            {
+                if (favourite != null)
+                {
+                    db.UserPropertyFavourites.Remove(favourite);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception) { }
+
+            return RedirectToAction("Index", "Home");
+        }
+    }
+}

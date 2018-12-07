@@ -13,6 +13,7 @@ namespace HSH.Areas.Admin.Models
         DbSet<Property> Propertys { get; }
         DbSet<PropertyType> PropertyTypes { get; }
         DbSet<PropertyLinkText> PropertyLinkTexts { get; }
+        object UserPropertyFavourites { get; }
 
         //added Task<int> below
         Task<int> SaveChangesAsync();

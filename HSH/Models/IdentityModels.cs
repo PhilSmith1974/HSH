@@ -34,7 +34,7 @@ namespace HSH.Models
         //}
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser> //IApplicationDbContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
@@ -62,6 +62,8 @@ namespace HSH.Models
         public DbSet<PropertyItem> PropertyItems { get; set; }
         public DbSet<FavouriteProperty> FavouritePropertys { get; set; }
         public DbSet<UserFavourite> UserFavourites { get; set; }
+        public DbSet<UserPropertyFavourite> UserPropertyFavourites { get; set; }
 
+        //object IApplicationDbContext.UserPropertyFavourites => throw new NotImplementedException();
     }
 }
