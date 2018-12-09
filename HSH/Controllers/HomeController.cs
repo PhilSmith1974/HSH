@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 
@@ -18,6 +17,16 @@ namespace HSH.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        
+
+        ////Added for unit Testing
+        //public HomeController() { }
+
+        ////added for unit testing
+        //public HomeController(IApplicationDbContext context)
+        //{
+        //    db = context;
+        //}
 
         public async Task<ActionResult> Index()
         {

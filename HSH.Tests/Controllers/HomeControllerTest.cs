@@ -31,10 +31,6 @@ namespace HSH.Tests.Controllers
         //}
 
 
-
-
-
-
         [TestMethod]
         public void About()
         {
@@ -67,7 +63,7 @@ namespace HSH.Tests.Controllers
         //    //Arrange
         //    HomeController controller = new HomeController();
         //    //Act
-        //    ViewResult result = controller.Search() as ViewResult;
+        //    ViewResult model result = controller.Search() as ViewResult;
         //    //Assert
         //    Assert.IsNotNull(result);
         //}
@@ -104,62 +100,63 @@ namespace HSH.Tests.Controllers
         //        PriceFrom = 140000
         //    };
 
-            //creating a controller using the test db
-           // HomeController controller = new HomeController(tdb);
+        //creating a controller using the test db
+        // HomeController controller = new HomeController(tdb);
 
-            //Act
-            //call controller searchIndexMethod
-           // var viewResult = await controller.SearchIndex(priceSearch) as ViewResult;
-            //var result = viewResult.ViewData.Model as IEnumerable<PropertyModel>;
+        //Act
+        //call controller searchIndexMethod
+        // var viewResult = await controller.SearchIndex(priceSearch) as ViewResult;
+        //var result = viewResult.ViewData.Model as IEnumerable<PropertyModel>;
 
-            //Assert
-            //Assert.AreEqual(2, result.Count());
-        }
+        //Assert
+        //Assert.AreEqual(2, result.Count());
+    }
 
-        //[TestMethod()]
-        //public async Task SearchIndexTest1Async()
-        //{
-        //    //Arrange
-        //    //creating the fake database with vehicles, tdb = test database
-        //    TestApplicationDbContext tdb = new TestApplicationDbContext();
-        //    Property prop1 = new Property
-        //    {
-        //        Description = "Test Property 2",
-        //        PropertyTypeId = 2,
-               
-        //    };
-        //    Property prop2 = new Property
-        //    {
-        //        Description = "Test Property 2",
-        //        Price = 110000
-        //    };
-        //    Property prop3 = new Property
-        //    {
-        //        Description = "Test Property 3",
-        //        Price = 150000
-        //    };
+    //[TestMethod()]
+    //public async Task SearchIndexTest1Async()
+    //{
+    //    //Arrange
+    //    //creating the fake database with vehicles, tdb = test database
+    //    TestApplicationDbContext tdb = new TestApplicationDbContext();
+    //    Property prop1 = new Property
+    //    {
+    //        Description = "Test Property 2",
+    //        PropertyTypeId = 2,
 
-        //    //adding the three vehicles to the "fake" database
-        //    tdb.Propertys.Add(prop1);
-        //    tdb.Propertys.Add(prop2);
-        //    tdb.Propertys.Add(prop3);
+    //    };
+    //    Property prop2 = new Property
+    //    {
+    //        Description = "Test Property 2",
+    //        Price = 110000
+    //    };
+    //    Property prop3 = new Property
+    //    {
+    //        Description = "Test Property 3",
+    //        Price = 150000
+    //    };
 
-        //    PropertySearchModel Search = new PropertySearchModel
-        //    {
-        //        PriceTo = 110000
-        //    };
+    //    //adding the three vehicles to the "fake" database
+    //    tdb.Propertys.Add(prop1);
+    //    tdb.Propertys.Add(prop2);
+    //    tdb.Propertys.Add(prop3);
 
-            //creating a controller using the test db
-            //HomeController controller = new HomeController(tdb);
+    //    PropertySearchModel Search = new PropertySearchModel
+    //    {
+    //        PriceTo = 110000
+    //    };
 
-            //Act
-            //call controller searchIndexMethod
-            //var viewResult = await controller.SearchIndex(yearSearch) as ViewResult;
-            //var result = viewResult.ViewData.Model as IEnumerable<PropertyModel>;
+    //    // creating a controller using the test db
+    //    HomeController controller = new HomeController(tdb);
 
-            //Assert
-            //Assert.AreEqual(2, result.Count());
-        }
+    //    //Act
+    //    //call controller searchIndexMethod
+    //    var viewResult = await controller.SearchIndex(Search) as ViewResult;
+    //    var result = viewResult.ViewData.Model as IEnumerable<PropertyModel>;
+
+    //    //Assert
+    //    Assert.AreEqual(2, result.Count());
+    //}
+}
 
         //[TestMethod()]
         //public void AboutTest()

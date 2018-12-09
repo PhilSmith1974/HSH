@@ -64,7 +64,7 @@ namespace HSH.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(PropertyModel model)
         {
-            // Possible error
+          
             if (ModelState.IsValid)
             {
                 Property prop = new Property();
