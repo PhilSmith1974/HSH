@@ -11,6 +11,7 @@ using HSH.Entities;
 using HSH.Tests.TestContext;
 using System.Threading.Tasks;
 using HSH.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HSH.Tests.Controllers
 {
@@ -18,7 +19,30 @@ namespace HSH.Tests.Controllers
     public class HomeControllerTest
     {
         //[TestMethod()]
-        //public async Task <ActionResult> Index()
+        ////public async Task<ActionResult> Index()
+        //public async Task Index()
+
+        //{
+        //    // Arrange
+        //    var LoginModel = new ValidationContext(LoginModel. null, null);
+        //   // HomeController controller = new HomeController();
+
+        //    Validator.TryValidateObject(logonModel, validationContext, validationResults, true);
+        //    foreach (var validationResult in validationResults)
+        //    {
+        //        controller.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
+        //    }
+        //    // Validate model state end
+
+        //    // Act
+        //    ViewResult result = controller.Index() as ViewResult;
+
+        //    // Assert
+        //   // Assert.IsNotNull(result);
+        //    Assert.AreEqual("Index", result.RouteValues["action"]);
+        //}
+        //[TestMethod]
+        //public void Index()
         //{
         //    // Arrange
         //    HomeController controller = new HomeController();
@@ -27,7 +51,21 @@ namespace HSH.Tests.Controllers
         //    ViewResult result = controller.Index() as ViewResult;
 
         //    // Assert
-        //    Assert.IsNotNull(result);
+        //    Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+        //}
+
+
+        //[TestMethod]
+        //public void Search()
+        //{
+        //    // Arrange
+        //    HomeController controller = new HomeController();
+
+        //    // Act
+        //    ViewResult result = controller.Search() as ViewResult;
+
+        //    // Assert
+        //    Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         //}
 
 

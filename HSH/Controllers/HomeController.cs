@@ -17,7 +17,7 @@ namespace HSH.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        
+
 
         ////Added for unit Testing
         //public HomeController() { }

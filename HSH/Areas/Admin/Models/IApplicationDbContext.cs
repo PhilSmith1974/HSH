@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HSH.Areas.Admin.Models
 {
-    public interface IApplicationDbContext
+    public interface IApplicationDbContext : IDisposable
     {
         DbSet<Property> Propertys { get; }
         DbSet<PropertyType> PropertyTypes { get; }
