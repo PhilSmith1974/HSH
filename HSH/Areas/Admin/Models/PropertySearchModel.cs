@@ -12,13 +12,13 @@ namespace HSH.Models
 {
     public class PropertySearchModel
     {
-        [Display(Name = "Search Term")]
+        [Display(Name = "Search Keyword")]
         public string SearchTerm { get; set; }
 
-        [Display(Name = "Price From")]
+        [Display(Name = "Max Price")]
         public double? PriceFrom { get; set; }
 
-        [Display(Name = "Price To")]
+        [Display(Name = "Min. Price")]
         public double? PriceTo { get; set; }
 
         [HiddenInput]
@@ -27,10 +27,10 @@ namespace HSH.Models
         [DisplayName("Property Type")]
         public List<SelectListItem> PropertyTypesList { get; set; }
 
-        [Display(Name = "No. Of Bedrooms From")]
+        [Display(Name = "Min. No. Of Bedrooms")]
         public int? NumberOfBedroomsFrom { get; set; }
 
-        [Display(Name = "No. Of Bedrooms To")]
+        [Display(Name = "Max. No. Of Bedrooms")]
         public int? NumberOfBedroomsTo { get; set; }
 
         [Display(Name = "County")]
