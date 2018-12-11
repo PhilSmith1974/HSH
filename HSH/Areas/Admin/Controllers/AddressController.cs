@@ -16,7 +16,7 @@ namespace HSH.Areas.Admin.Controllers
         {
             // API/search key - MUST be supplied to unlock search, 
             // if this is blank a restricted key is used which limits search to NR147PZ
-            string searchKey = "PCW5S-L9L9X-TQM9C-TZHCV";
+            string searchKey = "PCWXP-L3KTM-MK7M3-TNNSH";
             //PCWXP - L3KTM - MK7M3 - TNNSH
             //PCW5S-L9L9X-TQM9C-TZHCV
             // processing type - for other options see 
