@@ -15,10 +15,10 @@ namespace HSH.Models
         [Display(Name = "Search Keyword")]
         public string SearchTerm { get; set; }
 
-        [Display(Name = "Max Price")]
+        [Display(Name = "Min. Price")]
         public double? PriceFrom { get; set; }
 
-        [Display(Name = "Min. Price")]
+        [Display(Name = "Max. Price")]
         public double? PriceTo { get; set; }
 
         [HiddenInput]

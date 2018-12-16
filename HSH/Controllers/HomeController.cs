@@ -22,7 +22,7 @@ namespace HSH.Controllers
         ////Added for unit Testing
         //public HomeController() { }
 
-        ////added for unit testing
+        //added for unit testing
         //public HomeController(IApplicationDbContext context)
         //{
         //    db = context;

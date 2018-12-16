@@ -17,30 +17,22 @@ namespace HSH.Tests.Controllers
 {
     [TestClass()]
     public class HomeControllerTest
-    {
-        //[TestMethod()]
-        ////public async Task<ActionResult> Index()
-        //public async Task Index()
-
+    {    
+       // [TestMethod()]
+       //public async Task Index()       
         //{
         //    // Arrange
-        //    var LoginModel = new ValidationContext(LoginModel. null, null);
-        //   // HomeController controller = new HomeController();
 
-        //    Validator.TryValidateObject(logonModel, validationContext, validationResults, true);
-        //    foreach (var validationResult in validationResults)
-        //    {
-        //        controller.ModelState.AddModelError(validationResult.MemberNames.First(), validationResult.ErrorMessage);
-        //    }
         //    // Validate model state end
 
         //    // Act
-        //    ViewResult result = controller.Index() as ViewResult;
+        //    ViewResult result = HomeController.Index() as Task<ActionResult>;
 
-        //    // Assert
-        //   // Assert.IsNotNull(result);
-        //    Assert.AreEqual("Index", result.RouteValues["action"]);
+        //   //Assert
+        //    Assert.IsNotNull(result);
         //}
+
+
         //[TestMethod]
         //public void Index()
         //{
@@ -64,8 +56,10 @@ namespace HSH.Tests.Controllers
         //    // Act
         //    ViewResult result = controller.Search() as ViewResult;
 
+
         //    // Assert
-        //    Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+        //    Assert.IsNotNull(result);
+        //    //Assert.AreEqual("Your application description page.", result.ViewBag.Message);
         //}
 
 
